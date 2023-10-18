@@ -1,4 +1,7 @@
 @extends('.layout.app')
 @section('title')
-    Devstagram
+@endsection
+
+@section('content')
+    hola
 @endsection
