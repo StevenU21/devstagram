@@ -13,7 +13,7 @@
             <div class="bg-white shadow rounded-lg p-10">
                 <div class="flex flex-col gap-1 text-center items-center">
                     <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80" alt="">
-                    <p class="font-semibold">John Doe</p>
+                    <p class="font-semibold">{{ auth()->user()->username}}</p>
                     <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
                     <svg viewBox="0 0 24 24" class="mr-1" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     Los Angeles, California
@@ -261,7 +261,7 @@
                         <img class="w-12 h-12 object-cover rounded-full shadow cursor-pointer" alt="User avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80">
                     </div>
                     <div class="flex flex-col mb-2 ml-4 mt-1">
-                        <div class="text-gray-600 text-sm font-semibold">John Doe</div>
+                        <div class="text-gray-600 text-sm font-semibold">{{ auth()->user()->username}}</div>
                         <div class="flex w-full mt-1">
                             <div class="text-blue-700 font-base text-xs mr-1 cursor-pointer">
                                 SEO
