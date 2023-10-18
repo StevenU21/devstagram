@@ -14,10 +14,7 @@ class LoginController extends Controller
             'email'=> ['required','email'],
             'password'=> ['required'],
         ]);
-        if (!auth()->attempt([
-            'email'=> $request->email,
-            'password'=> $request->password,
-        ])){
+        if (!auth()->attempt($request->only('email', 'password'), $request->remember)){
             return back()->with('menssage', 'Bad Request');
         }
 
