@@ -6,7 +6,7 @@
 
         <title>@yield('Title') - Devstagram</title>
         @vite('resources/css/app.css')
-
+        @vite('resources/js/app.js')
     </head>
     <body>
         <header class="p-5 border-b shadow w-screen sticky z-[100] bg-white flex top-0">
