@@ -16,6 +16,7 @@
     </form>
     <form action="{{ route('images.store') }}" method="POST" id="dropzone" enctype="multipart/form-data"
         class="w-24 h-24 bg-neutral-100 mb-2 rounded-lg border-dashed border border-blue flex items-center justify-center cursor-pointer text-3xl text-gray-500 dropzone">
+        @csrf
         +
     </form>
     <footer class="flex justify-between mt-2">

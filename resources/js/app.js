@@ -3,7 +3,7 @@ import Dropzone from "dropzone";
 Dropzone.autoDiscover = false;
 
 const dropzone = new Dropzone('#dropzone', {
-    dictDefaultMessage: 'Drag and drop your files here or click to upload.',
+    dictDefaultMessage: '',
     acceptedFiles: '.png, .jpg, .jpeg, .gif',
     addRemoveLinks: true,
     maxFiles: 1,
