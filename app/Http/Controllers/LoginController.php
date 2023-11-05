@@ -18,6 +18,6 @@ class LoginController extends Controller
             return back()->with('menssage', 'Bad Request');
         }
 
-      return redirect()->route('index');
+      return redirect()->route('index', auth()->user()->username);
     }
 }
