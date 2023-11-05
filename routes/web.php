@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PostController;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,6 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogOutController::class, 'store'])->name('logout');
 Route::get('/{user:username}', [PostController::class, 'index'])->name('index');
 Route::post('/posts/create', [PostController::class, 'create'])->name('post.create');
+
+
+Route::post('/images', [ImageController::class, 'store'])->name('images.store');

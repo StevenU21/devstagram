@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    @stack('styles')
     <title>@yield('Title') - Devstagram</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
@@ -59,7 +60,7 @@
                             </form>
                         </div>
                         <a href="{{ route('index', auth()->user()->username) }}"
-                            class="inline-flex items-center relative px-3 border rounded-full hover:shadow-lg"  >
+                            class="inline-flex items-center relative px-3 border rounded-full hover:shadow-lg">
                             {{ auth()->user()->username }}
                             <div class="block flex-grow-0 flex-shrink-0 h-10 w-12 pl-5">
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"

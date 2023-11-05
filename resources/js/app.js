@@ -8,8 +8,7 @@ const dropzone = new Dropzone('#dropzone', {
     addRemoveLinks: true,
     maxFiles: 1,
     uploadMultiple: false,
-    url: "{{ route('post.create') }}",  // Add the URL for file upload
-    // Other options...
+    url: "{{ route('post.create') }}",
 });
 
 
