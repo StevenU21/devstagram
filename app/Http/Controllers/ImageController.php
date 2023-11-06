@@ -18,7 +18,7 @@ class ImageController extends Controller
         $imagePath = public_path('uploads') . '/' . $imageName;
         $serverImage->save($imagePath);
         return response()->json(
-            ['Succes'=> $imageName]
+            ['image'=> $imageName ]
         );
     }
 }
