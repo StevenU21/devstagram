@@ -9,10 +9,10 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+     public function __construct()
+     {
+         $this->middleware('auth')->except(['index','show']);
+     }
     public function index(User $user)
     {
         $posts  = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
@@ -33,5 +33,10 @@ class PostController extends Controller
             'image'=> $request->image,
             'user_id'=>auth()->user()->id
         ]);
+    }
+
+    public function show( User $user, Post $post)
+    {
+        return view('posts.show',['post'=>$post]);
     }
 }
