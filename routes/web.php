@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
@@ -32,5 +33,8 @@ Route::get('/{user:username}', [PostController::class, 'index'])->name('index');
 Route::post('/posts/create', [PostController::class, 'create'])->name('post.create');
 Route::post('/posts', [PostController::class, 'store'])->name('post.store');
 Route::get('/{user:username}/post/{post}', [PostController::class, 'show'])->name('post.show');
+
+Route::post('/{user:username}/post/{post}', [CommentController::class, 'store'])->name('comments.store');
+
 
 Route::post('/images', [ImageController::class, 'store'])->name('images.store');

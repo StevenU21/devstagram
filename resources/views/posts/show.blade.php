@@ -169,8 +169,19 @@
             </div>
         </div>
         @auth
-            <div
-                class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
+            <div>
+                @error('comment')
+                    <p class="text-red-500 mt-2 text-sm ml-2">
+                        {{ $message }}
+                    </p>
+                @enderror
+                @if (session('message'))
+                    <p class="text-green-500 text-sm ml-2">{{ session('message') }}</p>
+                @endif
+            </div>
+            <form  action="{{ route('comments.store', ['user' => $user, 'post' => $post->id]) }}" method='POST'
+                class="relative flex items-center self-center w-full max-w-xl p-2 pb-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
+                @csrf
                 <img class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer" alt="User avatar"
                     src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80">
                 <span class="absolute inset-y-0 right-0 flex items-center pr-6">
@@ -185,9 +196,10 @@
                     </button>
                 </span>
                 <input type="search"
+                    name="comment"
                     class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400"
                     style="border-radius: 25px" placeholder="Post a comment..." autocomplete="off">
-            </div>
+            </form>
         @endauth
     </div>
 @endsection
