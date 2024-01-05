@@ -3,7 +3,7 @@
         <div class="flex">
             <a href="{{ route('post.index', $post->user->username) }}" class="w-auto h-auto rounded-full">
                 <img class="w-12 h-12 object-cover rounded-full shadow cursor-pointer" alt="User avatar"
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80">
+                    src="{{ asset('profiles') . '/' . $user->image }}">
             </a>
             <div class="flex flex-col mb-2 ml-4 mt-1">
                 <a href="{{ route('post.index', $post->user->username) }}"
@@ -124,7 +124,7 @@
             class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
             @csrf
             <img class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer" alt="User avatar"
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80">
+                src="{{ asset('profiles/'.  auth()->user()->image)  }}">
             <span class="absolute inset-y-0 right-0 flex items-center pr-6">
                 <button type="submit" class="p-1 focus:outline-none focus:shadow-none hover:text-blue-500">
                     <svg class="w-6 h-6 transition ease-out duration-300 hover:text-blue-500 text-gray-400"

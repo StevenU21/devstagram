@@ -8,22 +8,30 @@
 
             <aside class="">
 
-                <div class="bg-white shadow rounded-lg p-10">
+                <div class="bg-white shadow rounded-lg p-4">
                     <div class="flex flex-col gap-1 text-center items-center">
-                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80"
-                            alt="">
-                        <p class="font-semibold">{{ $user->username }}</p>
+                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ asset('profiles') . '/' . $user->image }}" alt="">
+                        <div class="flex items-center gap-2">
+                            <p class="font-semibold">{{ $user->username }}</p>
+                            @auth
+                                @if ($user->id == auth()->user()->id)
+                                    <a href="{{ route('perfil.index') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                            class="w-4 h-4">
+                                            <path fill-rule="evenodd"
+                                                d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+
+                                    </a>
+                                @endif
+                            @endauth
+                        </div>
                         <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
-                            <svg viewBox="0 0 24 24" class="mr-1" width="16" height="16" stroke="currentColor"
-                                stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
                             Los Angeles, California
                         </div>
                     </div>
-                    
+
                     <div class="flex justify-center items-center gap-2 my-3">
                         <div class="font-semibold text-center mx-4">
                             <p class="text-black">102</p>
@@ -39,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 @include('posts.create')
 
                 <div class="bg-white shadow mt-6  rounded-lg p-6">

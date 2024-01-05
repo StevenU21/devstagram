@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     @stack('styles')
-    <title>@yield('Title') - Devstagram</title>
+    <title>@yield('title') - Devstagram</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
@@ -79,12 +79,8 @@
 
         </nav>
     </header>
-    @yield('title')
-    <main class="bg-gray-100">@yield('content')</main>
+    <main class="bg-gray-100 min-h-screen">@yield('content')</main>
 
-    <footer class="text-gray-600 text-center py-4">
-        Todos los derechos reservados - Devstagram {{ date('Y') }}
-    </footer>
 </body>
 
 </html>
