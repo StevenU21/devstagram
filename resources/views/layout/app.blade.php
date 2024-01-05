@@ -12,7 +12,7 @@
 </head>
 
 <body class="overflow-x-hidden">
-    <header class="p-5 border-b shadow w-screen sticky z-[100] bg-white flex top-0">
+    <header class="p-2 border-b shadow w-screen sticky z-[100] bg-white flex top-0">
         <nav class="bg-white w-full flex relative justify-between items-center px-8">
             <a href="/" class="font-bold"> Devstagram </a>
 
