@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index()->constrained()->cascadeOnDelete();
-            $table->foreignId('post_id')->index()->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->index()->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->index()->constrained()->onDelete('cascade');
             $table->text('comment');
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use \Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -33,6 +34,22 @@ class PostController extends Controller
             'image'=> $request->image,
             'user_id'=>auth()->user()->id
         ]);
+        return redirect()->route('post.index', auth()->user()->username);
+
+    }
+
+    public function destroy(Post $post){
+        $this->authorize('delete', $post);
+        $post->delete();
+
+        // Delte image
+        $image_path = public_path('uploads/' . $post->image);
+
+        if(File::exists($image_path)){
+            unlink($image_path);
+        }
+
+        return redirect()->route('post.index', auth()->user()->username);
     }
 
     public function show( User $user, Post $post)

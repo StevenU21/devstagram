@@ -11,7 +11,7 @@
     @vite('resources/js/app.js')
 </head>
 
-<body>
+<body class="overflow-x-hidden">
     <header class="p-5 border-b shadow w-screen sticky z-[100] bg-white flex top-0">
         <nav class="bg-white w-full flex relative justify-between items-center px-8">
             <a href="/" class="font-bold"> Devstagram </a>
@@ -21,7 +21,7 @@
 
             <!-- search bar -->
             <!-- <div class="hidden sm:block flex-shrink flex-grow-0 justify-start px-2"> -->
-            <div class="relative hidden sm:block flex-shrink flex-grow-0">
+            <div class="relative hidden sm:block flex-shrink flex-grow-0 ">
                 <input type="text" class="bg-purple-white bg-gray-100 rounded-lg border-0 p-3 w-full"
                     placeholder="Search something..." style="min-width:400px;">
                 <div class="absolute top-0 right-0 p-4 pr-3 text-purple-lighter">
@@ -59,7 +59,7 @@
                                 </button>
                             </form>
                         </div>
-                        <a href="{{ route('index', auth()->user()->username) }}"
+                        <a href="{{ route('post.index', auth()->user()->username) }}"
                             class="inline-flex items-center relative px-3 border rounded-full hover:shadow-lg">
                             {{ auth()->user()->username }}
                             <div class="block flex-grow-0 flex-shrink-0 h-10 w-12 pl-5">

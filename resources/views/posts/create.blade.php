@@ -1,4 +1,4 @@
-<div class="bg-white shadow rounded-lg mb-6 p-4">
+<div class="bg-white shadow rounded-lg mb-6 p-4 w-full mx-auto mt-6">
     @push('styles')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     @endpush
@@ -23,7 +23,7 @@
             <input type="hidden" name="image" value="{{ old('image') }}">
         </div>
         @error('image')
-        <p class="text-red-500">{{ $message }}</p>
+            <p class="text-red-500">{{ $message }}</p>
         @enderror
         <footer class="flex justify-between mt-2">
             <div class="flex gap-2">
@@ -63,5 +63,4 @@
             </button>
         </footer>
     </form>
-
 </div>
