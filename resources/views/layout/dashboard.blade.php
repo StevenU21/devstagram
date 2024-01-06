@@ -77,7 +77,7 @@
                                     <img class="w-16 rounded-full" src="{{ asset('profiles/' . $follower->image) }}">
                                 </a>
                                 <span class="text-xs text-gray-500">
-                                    {{ $follower->name }}
+                                    {{ $follower->username }}
                                 </span>
                             </li>
                         @endforeach
