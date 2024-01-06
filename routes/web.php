@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -41,7 +42,11 @@ Route::post('/posts/create', [PostController::class, 'create'])->name('post.crea
 Route::post('/posts', [PostController::class, 'store'])->name('post.store');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
+// Followers
+Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.follow');
+Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');
 
+// Posts
 Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
 Route::post('/{user:username}/post/{post}', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/{user:username}/post/{post}', [PostController::class, 'show'])->name('post.show');

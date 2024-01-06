@@ -10,11 +10,12 @@
 
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class="flex flex-col gap-1 text-center items-center">
-                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ asset('profiles') . '/' . $user->image }}" alt="">
+                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"
+                            src="{{ asset('profiles') . '/' . $user->image }}" alt="">
                         <div class="flex items-center gap-2">
                             <p class="font-semibold">{{ $user->username }}</p>
                             @auth
-                                @if ($user->id == auth()->user()->id)
+                                @if ($user->id === auth()->user()->id)
                                     <a href="{{ route('perfil.index') }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                             class="w-4 h-4">
@@ -22,8 +23,25 @@
                                                 d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z"
                                                 clip-rule="evenodd" />
                                         </svg>
-
                                     </a>
+                                @else
+                                    @if ($user->following(auth()->user()))
+                                        <form method="POST" action="{{ route('users.unfollow', $user) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 px-2 py-2 rounded-xl text-white text-sm">
+                                                Unfollow
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form method="POST" action="{{ route('users.follow', $user) }}">
+                                            @csrf
+                                            <button type="submit" href=""
+                                                class="bg-blue-500 px-2 py-2 rounded-xl text-white text-sm">
+                                                Follow
+                                            </button>
+                                        </form>
+                                    @endif
                                 @endif
                             @endauth
                         </div>
@@ -34,15 +52,15 @@
 
                     <div class="flex justify-center items-center gap-2 my-3">
                         <div class="font-semibold text-center mx-4">
-                            <p class="text-black">102</p>
+                            <p class="text-black">{{ $user->posts->count() }}</p>
                             <span class="text-gray-400">Posts</span>
                         </div>
                         <div class="font-semibold text-center mx-4">
-                            <p class="text-black">102</p>
+                            <p class="text-black">{{ $user->followers->count() }}</p>
                             <span class="text-gray-400">Followers</span>
                         </div>
                         <div class="font-semibold text-center mx-4">
-                            <p class="text-black">102</p>
+                            <p class="text-black">{{ $user->followings->count() }}</p>
                             <span class="text-gray-400">Folowing</span>
                         </div>
                     </div>
