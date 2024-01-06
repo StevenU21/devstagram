@@ -76,34 +76,7 @@
                 </svg>
             </a>
             @auth
-                @if ($post->checkLike(auth()->user()))
-                    <form method="POST" action="{{ route('posts.likes.destroy', $post) }}">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit"
-                            class="transition ease-out duration-300 hover:bg-gray-50 bg-gray-100 h-8 px-2 py-2 text-center rounded-full text-gray-100 cursor-pointer">
-                            <svg class="h-4 w-4 text-red-500" fill="red" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                @else
-                    <form method="POST" action="{{ route('posts.likes.store', $post) }}">
-                        @csrf
-                        <button type="submit"
-                            class="transition ease-out duration-300 hover:bg-gray-50 bg-gray-100 h-8 px-2 py-2 text-center rounded-full text-gray-100 cursor-pointer">
-                            <svg class="h-4 w-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                @endif
+                <livewire:like-post :post="$post" />
             @endauth
         </div>
     </div>
@@ -113,18 +86,14 @@
                 <div class="ml-1 text-gray-400 text-ms">{{ $post->comments->count() }}</div>
             </div>
         </div>
-        <div class="mt-3 mx-5 w-full flex justify-end text-xs">
-            <div class="flex text-gray-700  rounded-md mb-2 mr-4 items-center">Likes: <div
-                    class="ml-1 text-gray-400  text-ms"> {{ $post->likes->count() }}</div>
-            </div>
-        </div>
+
     </div>
     @auth
         <form action="{{ route('comments.store', ['user' => $post->user, 'post' => $post->id]) }}" method='POST'
             class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
             @csrf
             <img class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer" alt="User avatar"
-                src="{{ asset('profiles/'.  auth()->user()->image)  }}">
+                src="{{ asset('profiles/' . auth()->user()->image) }}">
             <span class="absolute inset-y-0 right-0 flex items-center pr-6">
                 <button type="submit" class="p-1 focus:outline-none focus:shadow-none hover:text-blue-500">
                     <svg class="w-6 h-6 transition ease-out duration-300 hover:text-blue-500 text-gray-400"

@@ -9,6 +9,7 @@
     <title>@yield('title') - Devstagram</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @livewireStyles
 </head>
 
 <body class="overflow-x-hidden">
@@ -80,7 +81,7 @@
         </nav>
     </header>
     <main class="bg-gray-100 min-h-screen">@yield('content')</main>
-
+    @livewireScripts
 </body>
 
 </html>
