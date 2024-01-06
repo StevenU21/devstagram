@@ -3,7 +3,7 @@
         <div class="flex">
             <a href="{{ route('post.index', $post->user->username) }}" class="w-auto h-auto rounded-full">
                 <img class="w-12 h-12 object-cover rounded-full shadow cursor-pointer" alt="User avatar"
-                    src="{{ asset('profiles') . '/' . $user->image }}">
+                    src="{{ asset('profiles') . '/' . $post->user->image }}">
             </a>
             <div class="flex flex-col mb-2 ml-4 mt-1">
                 <a href="{{ route('post.index', $post->user->username) }}"

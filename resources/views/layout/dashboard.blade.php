@@ -46,7 +46,7 @@
                             @endauth
                         </div>
                         <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
-                            Los Angeles, California
+                            Live a life you will remember.
                         </div>
                     </div>
 
