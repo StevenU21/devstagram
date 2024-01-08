@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('content')
     <!-- component -->
@@ -11,8 +11,7 @@
                 <div class="bg-white shadow rounded-lg p-4">
                     <div class="flex flex-col gap-1 text-center items-center">
                         <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"
-                            src="{{ $user->url() }}" alt="">
-                            {{-- src="{{ asset('profiles') . '/' . $user->image }}" alt=""> --}}
+                            src="{{ asset('profiles') . '/' . $user->image }}" alt="">
                         <div class="flex items-center gap-2">
                             <p class="font-semibold">{{ $user->username }}</p>
                             @auth
