@@ -16,17 +16,13 @@ class HomeController extends Controller
 
     public function __invoke()
     {
-        if (auth()->check()) {
-            // Si el usuario está autenticado, redirige a la vista post.index
-            return redirect()->route('post.index', auth()->user()->username);
-        }
-
-        //Get our posts
-        $ids = auth()->user()->followings->pluck('id')->toArray();
-        $posts = Post::whereIn('user_id', $ids)->paginate(20);
-
+        // Get posts from followed users
+        $followingIds = auth()->user()->followings->pluck('id')->toArray();
+        $posts = Post::whereIn('user_id', $followingIds)->latest()->paginate(20);
+    
         return view('home', [
             'posts' => $posts,
         ]);
     }
+    
 }

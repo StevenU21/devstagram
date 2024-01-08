@@ -17,11 +17,7 @@
     <header class="p-2 border-b shadow w-screen sticky z-[100] bg-white flex top-0">
         <nav class="bg-white w-full flex relative justify-between items-center px-8">
 
-            @if (Route::is('login') || Route::is('register'))
-                <a href="#" class="font-bold text-2xl"> DevStagram </a>
-            @else
-                <a href="{{ route('post.index', auth()->user()->username) }}" class="font-bold text-2xl"> DevStagram </a>
-            @endif
+            <a href="{{ route('home') }}" class="font-bold text-2xl"> DevStagram </a>
             <!-- end logo -->
 
             <!-- search bar -->
