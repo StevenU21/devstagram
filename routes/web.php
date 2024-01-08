@@ -10,8 +10,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
-use Illuminate\Auth\Events\Login;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Route;
 
 /*

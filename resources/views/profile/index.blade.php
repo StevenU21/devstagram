@@ -51,7 +51,7 @@
                     Save changes
                 </button>
 
-                <a href="{{ U }}"
+                <a href="{{ URL::previous() }}"
                     class="py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                     Return
                 </a>

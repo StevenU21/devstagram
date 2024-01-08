@@ -50,7 +50,7 @@ class PerfilController extends Controller
 
         // Procesar la imagen si se ha cargado una nueva
         if ($request->hasFile('image')) {
-            $image = $request->file('imagwe');
+            $image = $request->file('image');
             $imageName = Str::uuid() . "." . $image->extension();
 
             $serverImage = Image::make($image);
