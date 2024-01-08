@@ -1,5 +1,4 @@
 import Dropzone from "dropzone";
-import Swal from "sweetalert2";
 
 Dropzone.autoDiscover = false;
 
@@ -40,19 +39,3 @@ dropzone.removeFile("removedFile"),
     function () {
         document.querySelector('[name="image"]').value = "";
     };
-
-//script para generar un mensaje de salida 
-document.addEventListener("DOMContentLoaded", (event) => {
-    if (window.successMessage) {
-        Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: window.successMessage,
-            timer: 3000,
-            timerProgressBar: true,
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-        });
-    }
-});
