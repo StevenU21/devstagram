@@ -4,8 +4,7 @@
 
 @section('content')
     <div class="flex flex-col-reverse lg:flex-row gap-6 justify-center px-4">
-
-        <div class="container mx-auto px-4">
+        <div>
             @if ($posts->count() > 0)
                 <div class="py-6">
                     @foreach ($posts as $post)
