@@ -10,24 +10,12 @@ use Intervention\Image\Facades\Image;
 
 class PerfilController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['auth']);
-    // }
-
-    //lo comente porque el middleware esta en el archivo web.php
-    //se pueden agrupar directamente desde las rutas
-
     public function index()
     {
         $user = User::find(auth()->user()->id);
         return view('profile.index', compact('user'));
     }
 
-    //cambie la logica de store a update porque tiene mas sentido
-    //ya que el objetivo es actualizar el nombre de usuario o la imagen
-    //con este enfoque, el usuario puede cambiar su nombre de usuario
-    //y su imagen de perfil en cualquier momento y borrar la que ya tenia
     public function update(Request $request)
     {
         $request->validate([
@@ -74,33 +62,4 @@ class PerfilController extends Controller
             return redirect()->route('post.index', $user->username)->with('success', 'Perfil actualizado con éxito');
         }
     }
-
-    //aqui el codigo como lo tenias antes
-    //por si deseas volver a usarlo
-    
-    // public function store(Request $request)
-    // {
-    //     $request->request->add(['username' => Str::slug($request->username)]);
-    //     $this->validate($request, [
-    //         'username' => ['required', 'min:3', 'max:20', 'unique:users,username,' . auth()->user()->id, 'not_in:admin,twitter,facebook,instagram,github,linkedin,gitlab,profile,'],
-    //     ]);
-
-    //     if ($request->image) {
-    //         $input = $request->all();
-    //         $image = $request->file('image');
-    //         $imageName = Str::uuid() . "." . $image->extension();
-    //         $serverImage =  Image::make($image);
-    //         $serverImage->fit(1000, 1000);
-    //         $imagePath = public_path('profiles') . '/' . $imageName;
-    //         $serverImage->save($imagePath);
-    //     }
-
-    //     $user = User::find(auth()->user()->id);
-    //     $user->username = $request->username;
-    //     $user->image = $imageName ?? auth()->user()->image ?? null;
-    //     $user->save();
-
-    //     //Return user to profile
-    //     return redirect()->route('post.index', $user->username);
-    // }
 }

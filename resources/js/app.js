@@ -41,18 +41,15 @@ dropzone.removeFile("removedFile"),
         document.querySelector('[name="image"]').value = "";
     };
 
-//script para generar un mensaje de salida 
-document.addEventListener("DOMContentLoaded", (event) => {
-    if (window.successMessage) {
-        Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: window.successMessage,
-            timer: 3000,
-            timerProgressBar: true,
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-        });
-    }
+window.addEventListener("commented", (event) => {
+    Swal.fire({
+        title: '¡Éxito!',
+        text: 'Comentario Realizado.',
+        icon: 'success',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end'
+    });
 });

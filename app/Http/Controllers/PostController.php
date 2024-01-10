@@ -10,11 +10,7 @@ use \Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth')->except(['index', 'show']);
-    // }
-
+    
     public function index(User $user)
     {
         $posts  = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();

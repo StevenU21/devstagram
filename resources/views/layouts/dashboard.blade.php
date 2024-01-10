@@ -75,7 +75,7 @@
                         @foreach ($user->followings as $follower)
                             <li class="flex flex-col items-center space-y-2">
                                 <a class="block bg-white p-1 rounded-full" href="{{ route('post.index', $follower->username) }}">
-                                    <img class="w-16 rounded-full" src="{{ asset('profiles/' . $follower->image) }}">
+                                    <img class="w-16 rounded-full" src="{{ $follower->url() }}">
                                 </a>
                                 <span class="text-xs text-gray-500">
                                     {{ $follower->username }}

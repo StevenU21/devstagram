@@ -24,15 +24,10 @@
     @case(session('deleted'))
         <script>
             Swal.fire({
-                position: "bottom-start",
-                width: "25rem",
-                //agregar una altura a la alerta
-                heightAuto: true,
-                icon: 'warning',
-                title: 'Éxito',
+                icon: 'error',
+                title: 'Eliminado',
                 text: '{{ session('deleted') }}',
-                showConfirmButton: false,
-                timer: 1500
+                showConfirmButton: true,
             });
         </script>
     @break
