@@ -27,25 +27,24 @@ cd heracall-server
 ```sh
 composer install
 ```
+4. Run storage link.
+```sh
+php artisan storage:link
+```
 
-4. Create a `.env` file from `.env.example` and configure the environment variables.
+5. Create a `.env` file from `.env.example` and configure the environment variables.
 ```sh
 cp .env.example .env
 ```
 
-5. Generate an application key.
+6. Generate an application key.
 ```sh
 php artisan key:generate
 ```
 
-6. Run migrations and seeders (if you have them).
+7. Run migrations and seeders (if you have them).
 ```sh
 php artisan migrate --seed
-```
-
-7. Ensure that the `jpegoptim` binary is installed.
-```sh
-sudo apt update && sudo apt install jpegoptim
 ```
 
 Now you're all set to explore the exciting world of SocialHubProject! Happy coding!
