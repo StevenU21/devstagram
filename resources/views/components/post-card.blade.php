@@ -104,6 +104,6 @@
     @endauth
 
     {{-- comentarios --}}
-    <livewire:load-post :post="$post" />
+    <livewire:load-comments :post="$post" />
     {{-- fin comentarios --}}
 </div>
