@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -56,6 +57,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
     }
+    
     public function followings()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
@@ -64,5 +66,10 @@ class User extends Authenticatable
     public function following(User $user)
     {
         return $this->followers->contains($user->id);
+    }
+
+    public function url()
+    {
+        return (string) 'http://' . Storage::disk('public')->url('profiles/' . $this->image);
     }
 }

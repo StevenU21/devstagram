@@ -1,4 +1,5 @@
 import Dropzone from "dropzone";
+import Swal from "sweetalert2";
 
 Dropzone.autoDiscover = false;
 
@@ -39,3 +40,16 @@ dropzone.removeFile("removedFile"),
     function () {
         document.querySelector('[name="image"]').value = "";
     };
+
+window.addEventListener("commented", (event) => {
+    Swal.fire({
+        title: '¡Éxito!',
+        text: 'Comentario Realizado.',
+        icon: 'success',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end'
+    });
+});
