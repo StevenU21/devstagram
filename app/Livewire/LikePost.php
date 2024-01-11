@@ -29,6 +29,8 @@ class LikePost extends Component
             $this->isLiked = true;
             $this->likes++;
         }
+
+        $this->dispatch('postLiked', $this->post->id);
     }
 
     public function render()

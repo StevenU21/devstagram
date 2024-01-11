@@ -44,7 +44,7 @@
         {{ $post->text }}
     </div>
     <div class="flex justify-start mb-2 border-t border-gray-100">
-        <div class="flex w-full mt-1 pt-2 pl-5">
+        {{-- <div class="flex w-full mt-1 pt-2 pl-5">
             <span
                 class="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 pt-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24"
@@ -65,7 +65,11 @@
             <img class="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2.25&amp;w=256&amp;h=256&amp;q=80"
                 alt="">
-        </div>
+        </div> --}}
+
+        <livewire:user-liked-post :postId="$post->id" />
+
+        
         <div class="flex justify-end w-full mt-1 pt-2 pr-5">
             <a href="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}"
                 class="transition ease-out duration-300 hover:bg-blue-50 bg-blue-100 w-8 h-8 px-2 py-2 text-center rounded-full text-blue-400 cursor-pointer mr-2">

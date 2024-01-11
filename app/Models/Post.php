@@ -21,14 +21,18 @@ class Post extends Model
         return $this->belongsTo(User::class)->select(['name', 'username', 'image']);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function likes(){
+
+    public function likes()
+    {
         return $this->hasMany(Like::class);
     }
 
-    public function checkLike(User $user){
-        return $this->likes->contains('user_id', $user->id);
+    public function checkLike(User $user)
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
     }
 }

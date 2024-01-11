@@ -9,11 +9,10 @@ use \Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
-    
     public function index(User $user)
     {
         $posts  = Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
-        
+
         return view('layouts.dashboard', [
             'user' => $user,
             'posts' => $posts
