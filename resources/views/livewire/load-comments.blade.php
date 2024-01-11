@@ -1,4 +1,4 @@
-<div class="space-y-4">
+<div class="space-y-4 overflow-y-auto max-h-48">
     @forelse ($comments as $comment)
         <div class="flex items-start space-x-2 p-3 bg-white rounded-lg shadow">
             <img class="w-10 h-10 rounded-full" src="{{ $comment->user->url() }}" alt="User profile picture">
@@ -12,4 +12,13 @@
             No comments yet
         </div>
     @endforelse
+
+    @if ($paginator->hasMorePages())
+        <div class="mt-4 mb-4 flex justify-center">
+            <button wire:click="loadMore"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                Cargar más comentarios
+            </button>
+        </div>
+    @endif
 </div>
