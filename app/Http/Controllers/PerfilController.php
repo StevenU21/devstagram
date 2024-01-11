@@ -26,7 +26,7 @@ class PerfilController extends Controller
                 'unique:users,username,' . auth()->user()->id,
                 'not_in:admin,twitter,facebook,instagram,github,linkedin,gitlab,profile',
             ],
-            'image' => ['image', 'max:2048', 'mimes:jpg,jpeg,png,gif', 'dimensions:min_width=240,min_height=240'],
+            'image' => ['image', 'max:4048', 'mimes:jpg,jpeg,png,gif', 'dimensions:min_width=240,min_height=240'],
         ]);
 
         $user = User::find(auth()->user()->id);
