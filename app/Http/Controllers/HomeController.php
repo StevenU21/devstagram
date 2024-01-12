@@ -8,15 +8,27 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    // public function __invoke()
+    // {
+    //     // Get posts from followed users
+    //     $followingIds = auth()->user()->followings->pluck('id')->toArray();
+    //     $posts = Post::whereIn('user_id', $followingIds)->latest()->paginate(20);
+
+    //     return view('home', [
+    //         'posts' => $posts,
+    //     ]);
+    // }
+
     public function __invoke()
     {
-        // Get posts from followed users
         $followingIds = auth()->user()->followings->pluck('id')->toArray();
-        $posts = Post::whereIn('user_id', $followingIds)->latest()->paginate(20);
-    
+        $posts = Post::with(['user', 'likes', 'comments'])
+            ->whereIn('user_id', $followingIds)
+            ->latest()
+            ->paginate(20);
+
         return view('home', [
             'posts' => $posts,
         ]);
     }
-    
 }

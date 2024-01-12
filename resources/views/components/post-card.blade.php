@@ -4,7 +4,6 @@
             <a href="{{ route('post.index', $post->user->username) }}" class="w-auto h-auto rounded-full">
                 <img class="w-12 h-12 object-cover rounded-full shadow cursor-pointer" alt="User avatar"
                     src="{{ $post->user->url() }}">
-                {{-- src="{{ asset('profiles') . '/' . $post->user->image }}"> --}}
             </a>
             <div class="flex flex-col mb-2 ml-4 mt-1">
                 <a href="{{ route('post.index', $post->user->username) }}"
@@ -69,7 +68,7 @@
 
         <livewire:user-liked-post :postId="$post->id" />
 
-        
+
         <div class="flex justify-end w-full mt-1 pt-2 pr-5">
             <a href="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}"
                 class="transition ease-out duration-300 hover:bg-blue-50 bg-blue-100 w-8 h-8 px-2 py-2 text-center rounded-full text-blue-400 cursor-pointer mr-2">
@@ -93,10 +92,11 @@
         </div>
     </div> --}}
 
-    <livewire:count-comments :post="$post" />
+    <livewire:count-comments :postId="$post->id" />
 
     @auth
         <livewire:comment-post :post="$post" />
+
         <div>
             @error('comment')
                 <p class="text-red-500 text-sm mb-6 mx-3 px-2">
@@ -112,4 +112,4 @@
     {{-- comentarios --}}
     <livewire:load-comments :post="$post" />
     {{-- fin comentarios --}}
-</div>
+    </div>

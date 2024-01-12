@@ -45,11 +45,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function likes(){
+    public function likes()
+    {
         return $this->hasMany(Like::class);
     }
 
@@ -57,7 +59,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
     }
-    
+
     public function followings()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
@@ -71,5 +73,10 @@ class User extends Authenticatable
     public function url()
     {
         return (string) 'http://' . Storage::disk('public')->url('profiles/' . $this->image);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
