@@ -16,7 +16,7 @@ class CommentPost extends Component
     }
 
     protected $rules = [
-        'comment' => 'required|max:255',
+        'comment' => 'required',
     ];
 
     public function storeComment()

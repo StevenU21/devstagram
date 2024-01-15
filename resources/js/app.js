@@ -1,5 +1,52 @@
 import Dropzone from "dropzone";
 import Swal from "sweetalert2";
+import { EmojiButton } from "@joeattardi/emoji-button";
+
+function initializeEmojiButton() {
+    const buttons = document.querySelectorAll(".emoji-button");
+
+    buttons.forEach((button) => {
+        const picker = new EmojiButton();
+        const commentInput = button
+            .closest("form")
+            .querySelector('input[name="comment"]');
+
+        picker.on("emoji", (selection) => {
+            const emoji = selection.emoji;
+            const cursorPosition = commentInput.selectionStart;
+            const commentValue = commentInput.value;
+
+            const newCommentValue =
+                commentValue.slice(0, cursorPosition) +
+                emoji +
+                commentValue.slice(cursorPosition);
+
+            commentInput.value = newCommentValue;
+            commentInput.dispatchEvent(new Event("input"));
+            commentInput.focus();
+            commentInput.setSelectionRange(
+                cursorPosition + emoji.length,
+                cursorPosition + emoji.length
+            );
+        });
+
+        button.addEventListener("click", () => {
+            if (picker.pickerVisible) {
+                picker.hidePicker();
+            } else {
+                picker.showPicker(button);
+            }
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initializeEmojiButton();
+});
+
+Livewire.hook("message.processed", () => {
+    initializeEmojiButton();
+});
 
 Dropzone.autoDiscover = false;
 
@@ -43,13 +90,13 @@ dropzone.removeFile("removedFile"),
 
 window.addEventListener("commented", (event) => {
     Swal.fire({
-        title: '¡Éxito!',
-        text: 'Comentario Realizado.',
-        icon: 'success',
+        title: "¡Éxito!",
+        text: "Comentario Realizado.",
+        icon: "success",
         timer: 2000,
         timerProgressBar: true,
         showConfirmButton: false,
         toast: true,
-        position: 'top-end'
+        position: "top-end",
     });
 });

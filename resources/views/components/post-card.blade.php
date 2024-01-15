@@ -112,4 +112,4 @@
     {{-- comentarios --}}
     <livewire:load-comments :post="$post" />
     {{-- fin comentarios --}}
-    </div>
+</div>
