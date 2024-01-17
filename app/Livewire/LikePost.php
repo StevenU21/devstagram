@@ -10,11 +10,11 @@ class LikePost extends Component
     public $isLiked;
     public $likes;
 
-    public function mount($post)
-    {
-        $this->isLiked = $post->checkLike(auth()->user());
-        $this->likes = $this->post->likes->count();
-    }
+        public function mount($post)
+        {
+            $this->isLiked = $post->checkLike(auth()->user());
+            $this->likes = $this->post->likes->count();
+        }
 
     public function like()
     {

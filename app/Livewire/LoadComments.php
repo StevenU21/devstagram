@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,7 +17,7 @@ class LoadComments extends Component
     public $comments = [];
     private $paginator;
 
-    public function mount($post)
+    public function mount(Post $post)
     {
         $this->post = $post;
         $this->loadComments();
@@ -30,7 +31,7 @@ class LoadComments extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->commentsPerPage);
 
-        $this->comments = $this->paginator->items();
+        $this->comments = $this->paginator->getCollection();
     }
 
     public function loadMore()
@@ -41,12 +42,9 @@ class LoadComments extends Component
 
     public function render()
     {
-        return view(
-            'livewire.load-comments',
-            [
-                'comments' => $this->comments,
-                'paginator' => $this->paginator,
-            ]
-        );
+        return view('livewire.load-comments', [
+            'comments' => $this->comments,
+            'paginator' => $this->paginator,
+        ]);
     }
 }
