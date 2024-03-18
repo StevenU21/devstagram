@@ -65,6 +65,7 @@
                                 </svg>
 
                             </button>
+
                             <div id="dropdownContent"
                                 class="absolute right-0 mt-1 w-80 mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
                                 style="display: none;">
@@ -72,44 +73,7 @@
                                 <div class="px-4 py-2 border-b bg-gray-100 text-lg font-semibold text-gray-700">
                                     <div>Notificaciones</div>
                                 </div>
-                                <div class="px-4 py-2 flex justify-start items-center">
-                                    <button
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold text-sm py-2 px-4 rounded">
-                                        <i class="fas fa-trash"></i> Eliminar
-                                    </button>
-                                    <button
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-2 px-4 rounded ml-4">
-                                        <i class="fas fa-eye"></i>/<i class="fas fa-eye-slash"></i> Marcar/Desmarcar
-                                    </button>
-                                </div>
-                                <!-- Notificaciones -->
-                                <a href="#"
-                                    class="flex items-center px-4 py-3 border-b hover:bg-gray-100 space-x-4 relative">
-                                    <img class="h-10 w-10 rounded-full object-cover" src="{{ auth()->user()->url() }}"
-                                        alt="avatar">
-                                    <div class="text-sm space-y-1">
-                                        <p class="text-gray-900 leading-none">{{ auth()->user()->name }}</p>
-                                        <p class="text-gray-600">Mensaje de la notificación</p>
-                                        <p class="text-gray-600">Hace 3 min</p>
-                                    </div>
-                                    <span
-                                        class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-red-500 rounded-full">No
-                                        leído</span>
-                                </a>
-                                <!-- Notificación leída -->
-                                <a href="#"
-                                    class="flex items-center px-4 py-3 border-b hover:bg-gray-100 space-x-4 relative">
-                                    <img class="h-10 w-10 rounded-full object-cover" src="{{ auth()->user()->url() }}"
-                                        alt="avatar">
-                                    <div class="text-sm space-y-1">
-                                        <p class="text-gray-900 leading-none">{{ auth()->user()->name }}</p>
-                                        <p class="text-gray-600">Mensaje de la notificación</p>
-                                        <p class="text-gray-600">Hace 3 min</p>
-                                    </div>
-                                    <span
-                                        class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-green-500 rounded-full">Leído</span>
-                                </a>
-                                <!-- Agregar más notificaciones aquí -->
+                                @livewire('notifications.load-notifications')
                             </div>
                         </div>
 

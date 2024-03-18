@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Notifications\LikedPostNotification;
 use Livewire\Component;
 
 class LikePost extends Component
@@ -10,11 +11,11 @@ class LikePost extends Component
     public $isLiked;
     public $likes;
 
-        public function mount($post)
-        {
-            $this->isLiked = $post->checkLike(auth()->user());
-            $this->likes = $this->post->likes->count();
-        }
+    public function mount($post)
+    {
+        $this->isLiked = $post->checkLike(auth()->user());
+        $this->likes = $this->post->likes->count();
+    }
 
     public function like()
     {
@@ -28,6 +29,11 @@ class LikePost extends Component
             ]);
             $this->isLiked = true;
             $this->likes++;
+
+            $user = $this->post->user;
+
+            // Enviar notificación al usuario que está siendo seguido.
+            $user->notify(new LikedPostNotification($this->post, auth()->user()));
         }
 
         $this->dispatch('postLiked', $this->post->id);
