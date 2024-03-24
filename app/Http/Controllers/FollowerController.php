@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Notifications\UserFollowedNotification;
+use App\Notifications\UserUnfollowNotification;
 
 class FollowerController extends Controller
 {
@@ -14,11 +15,20 @@ class FollowerController extends Controller
         }
 
         $user->followers()->attach(auth()->user()->id);
-        return back();
+
+        // Enviar notificación al usuario que está siendo seguido.
+        $user->notify(new UserFollowedNotification(auth()->user()));
+
+        return redirect()->back()->with('success', 'Has comenzado a seguir a ' . $user->username);
     }
+
     public function destroy(User $user)
     {
         $user->followers()->detach(auth()->user()->id);
+
+        // Enviar notificación al usuario que ha dejado de ser seguido.
+        $user->notify(new UserUnfollowNotification(auth()->user()));
+
         return back();
     }
 }

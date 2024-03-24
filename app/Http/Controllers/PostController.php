@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\CreatedPostNotification;
+use App\Notifications\DeletedPostNotification;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\File;
 
@@ -15,7 +17,7 @@ class PostController extends Controller
             ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
-    
+
         return view('layouts.dashboard', [
             'user' => $user,
             'posts' => $posts
@@ -36,6 +38,12 @@ class PostController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
+        $followers = auth()->user()->followers;
+
+        foreach ($followers as $follower) {
+            $follower->notify(new CreatedPostNotification(auth()->user()->posts->last()));
+        }
+
         return redirect()->route('post.index', auth()->user()->username)->with('success', 'Post ha sido creado.');
     }
 
@@ -49,6 +57,12 @@ class PostController extends Controller
 
         if (File::exists($image_path)) {
             unlink($image_path);
+        }
+
+        $followers = auth()->user()->followers;
+
+        foreach ($followers as $follower) {
+            $follower->notify(new DeletedPostNotification($post, auth()->user(), $follower));
         }
 
         return redirect()->route('post.index', auth()->user()->username)->with('deleted', 'Post ha sido eliminado.');

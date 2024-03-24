@@ -8,6 +8,7 @@
     @stack('styles')
     <title>@yield('title') - Devstagram</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     @livewireStyles
@@ -23,15 +24,17 @@
             <!-- search bar -->
             <!-- <div class="hidden sm:block flex-shrink flex-grow-0 justify-start px-2"> -->
             @if (!Route::is('login') && !Route::is('register'))
-                <div class="relative hidden sm:block flex-shrink flex-grow-0 ">
-                    <input type="text" class="bg-purple-white bg-gray-100 rounded-lg border-0 p-3 w-full"
-                        placeholder="Search something..." style="min-width:400px;">
-                    <div class="absolute top-0 right-0 p-4 pr-3 text-purple-lighter">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+                <div class="flex-1 flex justify-center">
+                    <div class="relative hidden sm:block flex-shrink flex-grow-0 ">
+                        <input type="text" class="bg-purple-white bg-gray-100 rounded-lg border-0 p-3 w-full"
+                            placeholder="Search something..." style="min-width:400px;">
+                        <div class="absolute top-0 right-0 p-4 pr-3 text-purple-lighter">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -49,6 +52,31 @@
                 @endguest
                 @auth
                     <div class="flex items-center justify-center gap-4">
+
+                        <div class="relative inline-block text-left">
+                            <button id="dropdownButton"
+                                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                                <!-- Icono de la campana -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                                    fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9v5l-2 4v2h18v-2l-2-4V9c0-3.87-3.13-7-7-7zm-1 18c0 1.1.9 2 2 2s2-.9 2-2h-4zm1-14c-1.1 0-2 .9-2 2h4c0-1.1-.9-2-2-2z" />
+                                </svg>
+
+                            </button>
+
+                            <div id="dropdownContent"
+                                class="absolute right-0 mt-1 w-80 mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
+                                style="display: none;">
+                                <!-- Encabezado -->
+                                <div class="px-4 py-2 border-b bg-gray-100 text-lg font-semibold text-gray-700">
+                                    <div>Notificaciones</div>
+                                </div>
+                                @livewire('notifications.load-notifications')
+                            </div>
+                        </div>
+
                         <div class="block relative">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -90,6 +118,25 @@
     <main class="bg-gray-100 min-h-screen">@yield('content')</main>
 
     @include('components.alerts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdownButton = document.getElementById('dropdownButton');
+            var dropdownContent = document.getElementById('dropdownContent');
+
+            dropdownButton.addEventListener('click', function() {
+                var display = dropdownContent.style.display;
+                dropdownContent.style.display = display === 'none' ? 'block' : 'none';
+            });
+
+            // Cerrar el dropdown cuando se hace clic fuera de él
+            window.addEventListener('click', function(event) {
+                if (!dropdownButton.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
     @livewireScripts
 </body>
 
