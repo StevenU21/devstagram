@@ -66,7 +66,7 @@
                             class="inline-flex items-center relative px-3 border rounded-full hover:shadow-lg">
                             {{ auth()->user()->username }}
                             @if (auth()->user()->image)
-                                <img src="{{ auth()->user()->url() }}" alt="profile"
+                                <img src="{{ asset('storage/profiles' . '/' . auth()->user()->image) }}" alt="profile"
                                     class="rounded-full w-10 h-10 object-cover ml-4 -mr-4">
                             @else
                                 <div class="rounded-full w-10 h-10 object-cover ml-4 -mr-4">

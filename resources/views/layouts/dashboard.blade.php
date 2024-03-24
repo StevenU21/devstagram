@@ -8,7 +8,7 @@
             <aside class="space-y-4">
                 <x-card>
                     <x-card-content class="flex flex-col items-center justify-center">
-                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ $user->url() }}" alt="">
+                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ asset('storage/profiles' .'/' . $user->image) }}" alt="">
                         {{-- src="{{ asset('profiles') . '/' . $user->image }}" alt=""> --}}
                         <div class="flex items-center gap-2">
                             <p class="font-semibold">{{ $user->username }}</p>
@@ -77,7 +77,7 @@
                                 <li class="flex flex-col items-center space-y-2">
                                     <a class="block bg-white p-1 rounded-full"
                                         href="{{ route('post.index', $follower->username) }}">
-                                        <img class="w-16 rounded-full" src="{{ $follower->url() }}">
+                                        <img class="w-16 rounded-full" src="{{ asset('storage/profiles' .'/' . $follower->image) }}">
                                     </a>
                                     <span class="text-xs text-gray-500">
                                         {{ $follower->username }}
