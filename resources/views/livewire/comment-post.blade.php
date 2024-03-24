@@ -15,9 +15,8 @@
         </span>
     </span>
 
-    <input wire:model.live="comment" type="search" name="comment"
-        class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400"
-        style="border-radius: 25px" placeholder="Post a comment..." autocomplete="off">
+    <x-input wire:model.live="comment" type="search" name="comment" style="border-radius: 25px"
+        placeholder="Post a comment..." autocomplete="off" />
 
     @error('comment')
         <div class="mt-2">

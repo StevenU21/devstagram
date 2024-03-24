@@ -44,27 +44,23 @@
             <div class="flex-initial">
                 @guest
                     <div class="flex justify-end items-center relative gap-8">
-                        <a href="/login">Login</a>
-                        <a href={{ route('register') }}>Register</a>
-                        <div class="flex mr-4 items-center">
-                        </div>
+                        <x-link variant="link" href="/login">Login</x-link>
+                        <x-link variant="link" href="{{ route('register') }}">Register</x-link>
                     </div>
                 @endguest
                 @auth
                     <div class="flex items-center justify-center gap-4">
-
                         <div class="relative inline-block text-left">
-                            <button id="dropdownButton"
-                                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                            <x-button variant="icon" id="dropdownButton">
                                 <!-- Icono de la campana -->
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
-                                    fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
+                                <svg width="20" height="20" viewBox="0 0 15 15" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M12 2C8.13 2 5 5.13 5 9v5l-2 4v2h18v-2l-2-4V9c0-3.87-3.13-7-7-7zm-1 18c0 1.1.9 2 2 2s2-.9 2-2h-4zm1-14c-1.1 0-2 .9-2 2h4c0-1.1-.9-2-2-2z" />
+                                        d="M8.60124 1.25086C8.60124 1.75459 8.26278 2.17927 7.80087 2.30989C10.1459 2.4647 12 4.41582 12 6.79999V10.25C12 11.0563 12.0329 11.7074 12.7236 12.0528C12.931 12.1565 13.0399 12.3892 12.9866 12.6149C12.9333 12.8406 12.7319 13 12.5 13H8.16144C8.36904 13.1832 8.49997 13.4513 8.49997 13.75C8.49997 14.3023 8.05226 14.75 7.49997 14.75C6.94769 14.75 6.49997 14.3023 6.49997 13.75C6.49997 13.4513 6.63091 13.1832 6.83851 13H2.49999C2.2681 13 2.06664 12.8406 2.01336 12.6149C1.96009 12.3892 2.06897 12.1565 2.27638 12.0528C2.96708 11.7074 2.99999 11.0563 2.99999 10.25V6.79999C2.99999 4.41537 4.85481 2.46396 7.20042 2.3098C6.73867 2.17908 6.40036 1.75448 6.40036 1.25086C6.40036 0.643104 6.89304 0.150421 7.5008 0.150421C8.10855 0.150421 8.60124 0.643104 8.60124 1.25086ZM7.49999 3.29999C5.56699 3.29999 3.99999 4.86699 3.99999 6.79999V10.25L4.00002 10.3009C4.0005 10.7463 4.00121 11.4084 3.69929 12H11.3007C10.9988 11.4084 10.9995 10.7463 11 10.3009L11 10.25V6.79999C11 4.86699 9.43299 3.29999 7.49999 3.29999Z"
+                                        fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                                 </svg>
 
-                            </button>
+                            </x-button>
 
                             <div id="dropdownContent"
                                 class="absolute right-0 mt-1 w-80 mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
@@ -80,14 +76,15 @@
                         <div class="block relative">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit"
+                                <x-button type="submit" variant="icon"
                                     class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full relative ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M3 1C2.44771 1 2 1.44772 2 2V13C2 13.5523 2.44772 14 3 14H10.5C10.7761 14 11 13.7761 11 13.5C11 13.2239 10.7761 13 10.5 13H3V2L10.5 2C10.7761 2 11 1.77614 11 1.5C11 1.22386 10.7761 1 10.5 1H3ZM12.6036 4.89645C12.4083 4.70118 12.0917 4.70118 11.8964 4.89645C11.7012 5.09171 11.7012 5.40829 11.8964 5.60355L13.2929 7H6.5C6.22386 7 6 7.22386 6 7.5C6 7.77614 6.22386 8 6.5 8H13.2929L11.8964 9.39645C11.7012 9.59171 11.7012 9.90829 11.8964 10.1036C12.0917 10.2988 12.4083 10.2988 12.6036 10.1036L14.8536 7.85355C15.0488 7.65829 15.0488 7.34171 14.8536 7.14645L12.6036 4.89645Z"
+                                            fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                                     </svg>
-                                </button>
+                                </x-button>
                             </form>
                         </div>
                         <a href="{{ route('post.index', auth()->user()->username) }}"

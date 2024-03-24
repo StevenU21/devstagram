@@ -4,19 +4,21 @@
             <p>No hay notificaciones disponibles.</p>
         </div>
     @else
-        <div class="px-4 py-2 flex justify-start items-center">
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold text-sm py-2 px-4 rounded"
+        <div class="px-4 py-2 flex justify-start gap-4 items-center">
+            <x-button
+                class="bg-red-500 hover:bg-red-600 flex items-center gap-2"
                 wire:click.prevent="deleteAllNotifications">
                 <i class="fas fa-trash"></i> Eliminar
-            </button>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-sm py-2 px-4 rounded ml-4"
+            </x-button>
+            <x-button
+                class="flex items-center gap-2"
                 wire:click.prevent="toggleAllNotifications">
                 @if ($notifications->whereNull('read_at')->isEmpty())
                     <i class="fas fa-eye-slash"></i> Desmarcar Todos
                 @else
                     <i class="fas fa-eye"></i> Marcar Todos
                 @endif
-            </button>
+            </x-button>
         </div>
         <!-- Notificaciones -->
         @foreach ($notifications as $notification)
