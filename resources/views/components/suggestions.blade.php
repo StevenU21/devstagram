@@ -7,7 +7,7 @@ $users = User::get();
 
 <x-card class="bg-white rounded-md p-4 shadow-md mt-6 w-full">
     <x-card-subtitule>Suggested for you</x-card-subtitule>
-    <x-card-content class="">
+    <x-card-content class="flex flex-col">
         @foreach ($users as $user)
             <div class="flex">
                 <a class="block bg-white p-1 rounded-full" href="{{ route('post.index', $user->username) }}">
