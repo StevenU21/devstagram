@@ -5,14 +5,11 @@
     <div class="bg-gray-100">
 
         <main class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-5 lg:mx-12 w-2xl container px-2 w-full">
-
-            <aside class="">
-
-                <div class="bg-white shadow rounded-lg p-4">
-                    <div class="flex flex-col gap-1 text-center items-center">
-                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"
-                            src="{{ $user->url() }}" alt="">
-                            {{-- src="{{ asset('profiles') . '/' . $user->image }}" alt=""> --}}
+            <aside class="space-y-4">
+                <x-card>
+                    <x-card-content class="flex flex-col items-center justify-center">
+                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ $user->url() }}" alt="">
+                        {{-- src="{{ asset('profiles') . '/' . $user->image }}" alt=""> --}}
                         <div class="flex items-center gap-2">
                             <p class="font-semibold">{{ $user->username }}</p>
                             @auth
@@ -49,46 +46,53 @@
                         <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
                             Live a life you will remember.
                         </div>
-                    </div>
-
-                    <div class="flex justify-center items-center gap-2 my-3">
-                        <div class="font-semibold text-center mx-4">
-                            <p class="text-black">{{ $user->posts->count() }}</p>
-                            <span class="text-gray-400">Posts</span>
+                    </x-card-content>
+                    <x-card-footer>
+                        <div class="flex justify-center items-center">
+                            <div class="font-semibold text-center mx-4">
+                                <p class="text-black">{{ $user->posts->count() }}</p>
+                                <span class="text-gray-400">Posts</span>
+                            </div>
+                            <div class="font-semibold text-center mx-4">
+                                <p class="text-black">{{ $user->followers->count() }}</p>
+                                <span class="text-gray-400">Followers</span>
+                            </div>
+                            <div class="font-semibold text-center mx-4">
+                                <p class="text-black">{{ $user->followings->count() }}</p>
+                                <span class="text-gray-400">Folowing</span>
+                            </div>
                         </div>
-                        <div class="font-semibold text-center mx-4">
-                            <p class="text-black">{{ $user->followers->count() }}</p>
-                            <span class="text-gray-400">Followers</span>
-                        </div>
-                        <div class="font-semibold text-center mx-4">
-                            <p class="text-black">{{ $user->followings->count() }}</p>
-                            <span class="text-gray-400">Folowing</span>
-                        </div>
-                    </div>
-                </div>
+                    </x-card-footer>
+                </x-card>
 
                 @include('posts.create')
 
-                <div class="bg-white shadow mt-6  rounded-lg p-6">
-                    <h3 class="text-gray-600 text-sm font-semibold mb-4">Following</h3>
-                    <ul class="flex items-center justify-center space-x-2">
-                        @foreach ($user->followings as $follower)
-                            <li class="flex flex-col items-center space-y-2">
-                                <a class="block bg-white p-1 rounded-full" href="{{ route('post.index', $follower->username) }}">
-                                    <img class="w-16 rounded-full" src="{{ $follower->url() }}">
-                                </a>
-                                <span class="text-xs text-gray-500">
-                                    {{ $follower->username }}
-                                </span>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+                <x-card class="bg-white shadow mt-6  rounded-lg p-6">
+                    <x-card-header>
+                        <h3 class="text-gray-600 text-sm font-semibold mb-4">Following</h3>
+                    </x-card-header>
+                    <x-card-content>
+                        <ul class="flex items-center justify-center space-x-2">
+                            @foreach ($user->followings as $follower)
+                                <li class="flex flex-col items-center space-y-2">
+                                    <a class="block bg-white p-1 rounded-full"
+                                        href="{{ route('post.index', $follower->username) }}">
+                                        <img class="w-16 rounded-full" src="{{ $follower->url() }}">
+                                    </a>
+                                    <span class="text-xs text-gray-500">
+                                        {{ $follower->username }}
+                                    </span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </x-card-content>
+                </x-card>
 
-                <div class="flex bg-white shadow mt-6  rounded-lg p-2">
-                    <img src="https://images.unsplash.com/photo-1439130490301-25e322d88054?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1189&amp;q=80"
+                <x-card>
+                    <x-card-content  class="flex">
+                        <img src="https://images.unsplash.com/photo-1439130490301-25e322d88054?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1189&amp;q=80"
                         alt="Just a flower" class=" w-16  object-cover  h-16 rounded-xl">
-                    <div class="flex flex-col justify-center w-full px-2 py-1">
+                        <div class="flex flex-col justify-center w-full px-2 py-1">
                         <div class="flex justify-between items-center ">
                             <div class="flex flex-col">
                                 <h2 class="text-sm font-medium">Massive Dynamic</h2>
@@ -116,7 +120,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-card-content>
+                </x-card>
 
                 <div class="grid mt-5 grid-cols-2  space-x-4 overflow-y-scroll flex justify-center items-center w-full ">
                     <div class="relative flex flex-col justify-between   bg-white shadow-md rounded-3xl  bg-cover text-gray-800  overflow-hidden cursor-pointer w-full object-cover object-center rounded shadow-md h-64 my-2"
