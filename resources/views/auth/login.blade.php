@@ -32,7 +32,7 @@
                 @error('email')
                     <p class="text-red-500">{{ $message }}</p>
                 @enderror
-                <x-input class="pl-2 outline-none border-none flex-1" type="password" name="password" id=""
+                <x-input type="password" name="password" id=""
                     placeholder="Password" />
                 @error('password')
                     <p class="text-red-500">{{ $message }}</p>
