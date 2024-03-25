@@ -62,8 +62,9 @@
                                 </p>
                                 <p class="text-gray-600">{{ $notification->created_at->diffForHumans() }}</p>
                             </div>
-                            <span
-                                class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-{{ $notification->read_at ? 'green' : 'red' }}-500 rounded-full">{{ $notification->read_at ? 'Leído' : 'No leído' }}</span>
+                            <span  class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-{{ $notification->read_at ? 'green' : 'red' }}-500 rounded-full">
+                                {{ $notification->read_at ? 'Leído' : 'No leído' }}
+                            </span>
                         </a>
                     @endforeach
                 @endif
