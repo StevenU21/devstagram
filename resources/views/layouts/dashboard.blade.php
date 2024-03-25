@@ -67,7 +67,7 @@
 
                 @include('posts.create')
 
-                <x-card class="bg-white shadow mt-6  rounded-lg p-6">
+                <x-card class="bg-white shadow mt-6  rounded-lg p-6 overflow-x-auto">
                     <x-card-header>
                         <h3 class="text-gray-600 text-sm font-semibold mb-4">Following</h3>
                     </x-card-header>
@@ -75,14 +75,6 @@
                         <ul class="flex items-center justify-center space-x-2 flex-wrap">
                             @foreach ($user->followings as $follower)
                             <div class="flex flex-col items-center space-y-2">
-                                <a class="block bg-white p-1 rounded-full"
-                                    href="{{ route('post.index', $follower->username) }}">
-                                    <img class="w-16 rounded-full" src="{{ asset('storage/profiles' .'/' . $follower->image) }}">
-                                </a>
-                                <span class="text-xs text-gray-500">
-                                    {{ $follower->username }}
-                                </span>
-                            </div>                                <div class="flex flex-col items-center space-y-2">
                                 <a class="block bg-white p-1 rounded-full"
                                     href="{{ route('post.index', $follower->username) }}">
                                     <img class="w-16 rounded-full" src="{{ asset('storage/profiles' .'/' . $follower->image) }}">
