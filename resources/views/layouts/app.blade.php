@@ -25,7 +25,7 @@
             <!-- <div class="hidden sm:block flex-shrink flex-grow-0 justify-start px-2"> -->
             @if (!Route::is('login') && !Route::is('register'))
                 <div class="max-w-xl">
-                    <x-label>
+                    <x-label variant="icon">
                         <x-input type="text" placeholder="Search something..." />
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
