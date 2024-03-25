@@ -1,7 +1,19 @@
 <?php
 
 use App\Models\User;
-$users = User::get();
+use App\Models\Follower;
+
+$userId = auth()->user()->id;
+
+$users = User::query()
+    ->select('users.*')
+    ->leftJoin('followers', function($join) use ($userId) {
+        $join->on('users.id', '=', 'followers.user_id')
+             ->where('followers.follower_id', '=', $userId);
+    })
+    ->whereNull('followers.user_id')
+    ->limit(10)
+    ->get();
 
 ?>
 

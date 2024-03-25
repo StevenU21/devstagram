@@ -14,10 +14,10 @@ class PostController extends Controller
     public function index(User $user)
     {
         $posts = Post::with('user')
-            ->where('user_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
+        ->where('user_id', $user->id)
+        ->orderBy('created_at', 'desc')
+        ->limit(10)
+        ->get();
         return view('layouts.dashboard', [
             'user' => $user,
             'posts' => $posts
