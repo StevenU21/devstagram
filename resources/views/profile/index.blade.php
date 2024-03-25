@@ -5,73 +5,74 @@
 @endsection
 
 @section('content')
-    <div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold text-center mb-6">{{ auth()->user()->username }}</h1>
+    <x-card class="max-w-lg">
+        <x-card-header>
+            <x-card-title class="text-2xl font-bold text-center mb-6">{{ auth()->user()->username }}</x-card-title>
+        </x-card-header>
 
-        <form method="POST" action="{{ route('perfil.update', auth()->user()->id) }}"
-            class="flex flex-col gap-6 w-full mx-auto" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+        <x-card-content>
+            <form method="POST" action="{{ route('perfil.update', auth()->user()->id) }}" class="flex flex-col w-full mx-auto"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-            <!-- Nombre de usuario -->
-            <div class="mb-6">
-                <label for="username" class="text-sm font-medium text-gray-700">Username</label>
-                <input name="username" id="username" type="text"
-                    class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-                    placeholder="Username" value="{{ old('username', auth()->user()->username) }}">
+                <!-- Nombre de usuario -->
+                <div class="mb-6">
+                    <x-label for="username">Username</x-label>
+                    <x-input name="username" id="username" type="text"
+                        class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                        placeholder="Username" value="{{ old('username', auth()->user()->username) }}" />
 
-                @error('username')
-                    <div class="text-red-500 mt-2 text-sm">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <!-- Descripcion -->
-            <div class="mb-6">
-                <label for="description" class="text-sm font-medium text-gray-700">Description</label>
-                <input type="text" name="description" id="description"
-                    class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-                    placeholder="Description" value="{{ old('description', auth()->user()->description) }}">
-
-                @error('description')
-                    <div class="text-red-500 mt-2 text-sm">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <!-- Vista previa de la imagen -->
-            <div class="mb-6">
-                <label for="image" class="text-sm font-medium text-gray-700">Profile Image</label>
-                <input name="image" id="image" type="file" accept=".jpeg, .jpg, .png"
-                    class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-                    onchange="previewImage(event)">
-                <div class="mt-2">
-                    <img id="image-preview" class="hidden rounded-lg max-w-full h-auto" alt="Preview">
+                    @error('username')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
-                @error('image')
-                    <div class="text-red-500 mt-2 text-sm">
-                        {{ $message }}
+                <!-- Descripcion -->
+                <div class="mb-6">
+                    <x-label for="description">Description</x-label>
+                    <x-input type="text" name="description" id="description"
+                        class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                        placeholder="Description" value="{{ old('description', auth()->user()->description) }}" />
+
+                    @error('description')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Vista previa de la imagen -->
+                <div class="mb-6">
+                    <x-label for="image">Profile Image</x-label>
+                    <x-input name="image" id="image" type="file" accept=".jpeg, .jpg, .png"
+                        onchange="previewImage(event)" />
+                    <div class="mt-2">
+                        <img id="image-preview" class="hidden rounded-lg max-w-full h-auto" alt="Preview">
                     </div>
-                @enderror
-            </div>
 
-            <div class="flex justify-center">
-                <!-- Botón de envío -->
-                <button type="submit"
-                    class="py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mr-2">
-                    Save changes
-                </button>
+                    @error('image')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
-                <a href="{{ URL::previous() }}"
-                    class="py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                    Return
-                </a>
-            </div>
-        </form>
-    </div>
+                <div class="flex justify-center gap-4">
+                    <!-- Botón de envío -->
+                    <x-button type="submit">
+                        Save changes
+                    </x-button>
+
+                    <x-link href="{{ URL::previous() }}">
+                        Return
+                    </x-link>
+                </div>
+            </form>
+        </x-card-content>
+    </x-card>
 
     <script>
         function previewImage(event) {

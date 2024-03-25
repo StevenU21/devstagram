@@ -44,7 +44,7 @@
                             @endauth
                         </div>
                         <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
-                            {{ empty($user->description) ? 'Sin definir' : $user->description }}
+                            {{ empty($user->description) ? null : $user->description }}
                         </div>
                     </x-card-content>
                     <x-card-footer>
