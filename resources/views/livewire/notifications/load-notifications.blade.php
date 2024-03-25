@@ -23,7 +23,7 @@
 
 
         <div id="dropdownContent"
-            class="absolute right-0 mt-1 w-80 mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
+            class="absolute right-0 mt-1 w-[350px] mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
             style="display: none;">
             <!-- Encabezado -->
             <x-card class="border">
