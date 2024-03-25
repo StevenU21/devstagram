@@ -26,7 +26,8 @@ class PerfilController extends Controller
                 'unique:users,username,' . auth()->user()->id,
                 'not_in:admin,twitter,facebook,instagram,github,linkedin,gitlab,profile',
             ],
-            'image' => ['image', 'max:4048', 'mimes:jpg,jpeg,png,gif', 'dimensions:min_width=240,min_height=240'],
+            'description' => ['min:5', 'max:60', 'nullable', 'string'],
+            'image' => ['image', 'max:4048', 'mimes:jpg,jpeg,png,gif,webp', 'dimensions:min_width=240,min_height=240'],
         ]);
 
         $user = User::find(auth()->user()->id);
@@ -34,6 +35,11 @@ class PerfilController extends Controller
         // Verificar si el nombre de usuario ha cambiado
         if ($user->username !== $request->username) {
             $user->username = $request->username;
+        }
+
+        // Verificar si la descripción ha cambiado
+        if ($user->description !== $request->description) {
+            $user->description = $request->description;
         }
 
         // Procesar la imagen si se ha cargado una nueva

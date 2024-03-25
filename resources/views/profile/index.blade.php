@@ -8,17 +8,17 @@
     <div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <h1 class="text-2xl font-bold text-center mb-6">{{ auth()->user()->username }}</h1>
 
-        <form method="POST" action="{{ route('perfil.update', auth()->user()->id) }}" class="flex flex-col gap-4"
-            enctype="multipart/form-data">
+        <form method="POST" action="{{ route('perfil.update', auth()->user()->id) }}"
+            class="flex flex-col gap-6 w-full mx-auto" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
             <!-- Nombre de usuario -->
-            <div class="mb-4">
+            <div class="mb-6">
                 <label for="username" class="text-sm font-medium text-gray-700">Username</label>
                 <input name="username" id="username" type="text"
-                    class="mt-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-                    placeholder="Username" value="{{ auth()->user()->username }}">
+                    class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                    placeholder="Username" value="{{ old('username', auth()->user()->username) }}">
 
                 @error('username')
                     <div class="text-red-500 mt-2 text-sm">
@@ -27,11 +27,25 @@
                 @enderror
             </div>
 
+            <!-- Descripcion -->
+            <div class="mb-6">
+                <label for="description" class="text-sm font-medium text-gray-700">Description</label>
+                <input type="text" name="description" id="description"
+                    class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                    placeholder="Description" value="{{ old('description', auth()->user()->description) }}">
+
+                @error('description')
+                    <div class="text-red-500 mt-2 text-sm">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <!-- Vista previa de la imagen -->
-            <div class="mb-4">
+            <div class="mb-6">
                 <label for="image" class="text-sm font-medium text-gray-700">Profile Image</label>
                 <input name="image" id="image" type="file" accept=".jpeg, .jpg, .png"
-                    class="mt-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                    class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
                     onchange="previewImage(event)">
                 <div class="mt-2">
                     <img id="image-preview" class="hidden rounded-lg max-w-full h-auto" alt="Preview">
