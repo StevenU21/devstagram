@@ -72,17 +72,17 @@
                         <h3 class="text-gray-600 text-sm font-semibold mb-4">Following</h3>
                     </x-card-header>
                     <x-card-content>
-                        <ul class="flex items-center justify-center space-x-2">
+                        <ul class="flex items-center justify-center space-x-2 flex-col">
                             @foreach ($user->followings as $follower)
-                                <li class="flex flex-col items-center space-y-2">
+                                <div class="flex flex-col items-center space-y-2">
                                     <a class="block bg-white p-1 rounded-full"
                                         href="{{ route('post.index', $follower->username) }}">
-                                        <img class="w-16 rounded-full" src="{{ $follower->url() }}">
+                                        <img class="w-16 rounded-full" src="{{ asset('storage/profiles' .'/' . $follower->image) }}">
                                     </a>
                                     <span class="text-xs text-gray-500">
                                         {{ $follower->username }}
                                     </span>
-                                </li>
+                                </div>
                             @endforeach
                         </ul>
                     </x-card-content>

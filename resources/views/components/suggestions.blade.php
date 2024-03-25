@@ -5,13 +5,13 @@ $users = User::get();
 
 ?>
 
-<div class="bg-white rounded-md p-4 shadow-md mt-6 w-full">
-    <h2>Suggested for you</h2>
-    <ul class="">
+<x-card class="bg-white rounded-md p-4 shadow-md mt-6 w-full">
+    <x-card-subtitule>Suggested for you</x-card-subtitule>
+    <x-card-content class="flex flex-col">
         @foreach ($users as $user)
-            <li class="flex items-center">
+            <div class="flex items-center">
                 <a class="block bg-white p-1 rounded-full" href="{{ route('post.index', $user->username) }}">
-                    <img class="w-10 rounded-full" src="{{ $user->url() }}">
+                    <img class="w-10 rounded-full" src="{{ asset('storage/profiles' . '/' . $user->image) }}">
                 </a>
                 <div>
                     <a class="text-xs font-bold block bg-white p-1 rounded-full"
@@ -38,7 +38,7 @@ $users = User::get();
                         </button>
                     </form>
                 @endif
-            </li>
+                </div>
         @endforeach
-    </ul>
-</div>
+    </x-card-content>
+</x-card>
