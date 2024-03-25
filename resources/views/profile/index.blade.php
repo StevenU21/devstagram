@@ -7,7 +7,7 @@
 @section('content')
     <x-card class="max-w-lg">
         <x-card-header>
-            <x-card-title class="text-2xl font-bold text-center mb-6">{{ auth()->user()->username }}</x-card-title>
+            <x-card-title>{{ auth()->user()->username }}</x-card-title>
         </x-card-header>
 
         <x-card-content>

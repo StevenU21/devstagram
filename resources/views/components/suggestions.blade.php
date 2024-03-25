@@ -26,16 +26,16 @@ $users = User::get();
                     <form method="POST" action="{{ route('users.unfollow', $user) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500 text-xs ml-2">
+                        <x-button variant="text" type="submit">
                             Unfollow
-                        </button>
+                        </x-button>
                     </form>
                 @else
                     <form method="POST" action="{{ route('users.follow', $user) }}">
                         @csrf
-                        <button type="submit" href="" class="text-blue-500 text-xs ml-2">
+                        <x-button type="submit" variant="text" class="text-blue-500">
                             Follow
-                        </button>
+                        </x-button>
                     </form>
                 @endif
                 </div>
