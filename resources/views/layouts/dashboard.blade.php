@@ -73,7 +73,7 @@
                     </x-card-header>
                     <x-card-content>
                         <ul class="flex items-center justify-center space-x-2 flex-wrap">
-                            @foreach ($user->followings as $follower)
+                            @foreach ($user->followings()->limit(7)->get() as $follower)
                             <div class="flex flex-col items-center space-y-2">
                                 <a class="block bg-white p-1 rounded-full"
                                     href="{{ route('post.index', $follower->username) }}">
