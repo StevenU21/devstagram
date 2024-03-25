@@ -3,9 +3,9 @@
     <img class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer" alt="User avatar"
         src="{{ auth()->user()->url() }}">
 
-    <x-label>
+    <x-label variant="icon">
         <x-input wire:model.live="comment" type="search" name="comment"
-        placeholder="Post a comment..." autocomplete="off" />
+        placeholder="Post a comment..." autocomplete="off" class="flex"/>
         <span class="mr-4">
             <span class="emoji-button focus:outline-none focus:shadow-none hover:text-blue-500"
                 id="emojiButton{{ $post->id }}" style="cursor: pointer;">
