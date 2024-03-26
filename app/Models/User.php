@@ -71,9 +71,13 @@ class User extends Authenticatable
         return $this->followers->contains($user->id);
     }
 
-    public function url()
+    public function image()
     {
-        return (string) 'http://' . Storage::disk('public')->url('profiles/' . $this->image);
+        if ($this->image) {
+            return asset('storage/profiles/' . $this->image);
+        } else {
+            return asset('img/user.png');
+        }
     }
 
     public function comments()

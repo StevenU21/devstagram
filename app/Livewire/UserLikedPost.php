@@ -34,7 +34,7 @@ class UserLikedPost extends Component
             }
 
             $profileUrls = $this->likedProfiles->map(function ($like) {
-                return optional($like->user)->url() ?? '';
+                return optional($like->user)->image() ?? '';
             });
 
             $this->dispatch('updateLikedProfiles', $profileUrls);

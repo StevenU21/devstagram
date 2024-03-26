@@ -28,7 +28,7 @@ class CommentedPostNotification extends Notification
     public function toDatabase($notifiable)
     {
         $url = route('post.show', ['user' => $this->post->user->username, 'post' => $this->post->id]);
-        $imgurl = $this->commenter->url();
+        $imgurl = $this->commenter->image();
 
         return [
             'user_name' => $this->commenter->username,

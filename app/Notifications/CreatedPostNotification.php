@@ -34,7 +34,7 @@ class CreatedPostNotification extends Notification
     public function toDatabase(object $notifiable): array
     {
         $url = route('post.show', ['user' => $this->post->user->username, 'post' => $this->post->id]);
-        $imgurl = $this->post->user->url();
+        $imgurl = $this->post->user->image();
 
         return [
             'user_name' => $this->post->user->username,
