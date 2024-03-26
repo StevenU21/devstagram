@@ -14,8 +14,8 @@ class CountComments extends Component
 
     public function mount($postId)
     {
-        $this->post = Post::find($postId);
-        $this->count = $this->post->comments()->count();
+        $this->post = Post::withCount('comments')->find($postId);
+        $this->count = $this->post->comments_count;
     }
 
     #[On('commented')]
