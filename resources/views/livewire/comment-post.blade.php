@@ -1,7 +1,7 @@
 <form wire:submit.prevent="storeComment"
     class="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
     <img class="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer" alt="User avatar"
-        src="{{ auth()->user()->url() }}">
+    src="{{ asset('storage/profiles' . '/' . auth()->user()->image) }}">
 
     <x-label variant="icon">
         <x-input wire:model.live="comment" type="search" name="comment"

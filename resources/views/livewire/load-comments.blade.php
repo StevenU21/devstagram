@@ -1,7 +1,7 @@
 <div class="space-y-4 overflow-y-auto max-h-48">
     @forelse ($comments as $comment)
-        <div wire:key="{{ $comment->id }}" class="flex items-start space-x-2 p-3 bg-white rounded-lg shadow">
-            <img class="w-10 h-10 rounded-full" src="{{ $comment->user->url() }}" alt="User profile picture">
+        <div wire:key="{{ $comment->id }}">
+            <img class="w-10 h-10 rounded-full"  src="{{ asset('storage/profiles' . '/' . $comment->user->image) }}" alt="User profile picture">
             <div class="space-y-1">
                 <p class="font-semibold text-sm text-blue-600">{{ $comment->user->username }}</p>
                 <p class="text-sm text-gray-700">{{ $comment->comment }}</p>
