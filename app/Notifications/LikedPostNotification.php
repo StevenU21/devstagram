@@ -30,7 +30,7 @@ class LikedPostNotification extends Notification
     public function toDatabase(object $notifiable): array
     {
         $url = route('post.show', ['user' => $this->post->user->username, 'post' => $this->post->id]);
-        $imgurl = $this->liker->url();
+        $imgurl = $this->liker->image();
 
         return [
             'user_name' => $this->liker->username,

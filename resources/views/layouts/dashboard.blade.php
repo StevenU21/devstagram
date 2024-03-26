@@ -8,8 +8,7 @@
             <aside class="space-y-4">
                 <x-card>
                     <x-card-content class="flex flex-col items-center justify-center">
-                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"
-                            src="{{ asset('storage/profiles/' . $user->image) }}" alt="">
+                        <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="{{ $user->image() }}" alt="">
                         <div class="flex items-center gap-2">
                             <p class="font-semibold">{{ $user->username }}</p>
                             @auth
@@ -65,7 +64,9 @@
                     </x-card-footer>
                 </x-card>
 
-                @include('posts.create')
+                @if (auth()->user() && auth()->user()->id == $user->id)
+                    @include('posts.create')
+                @endif
 
                 <x-card class="bg-white shadow mt-6  rounded-lg p-6 overflow-x-auto">
                     <x-card-header>
@@ -74,15 +75,15 @@
                     <x-card-content>
                         <ul class="flex items-center justify-center space-x-2 flex-wrap">
                             @foreach ($user->followings()->limit(7)->get() as $follower)
-                            <div class="flex flex-col items-center space-y-2">
-                                <a class="block bg-white p-1 rounded-full"
-                                    href="{{ route('post.index', $follower->username) }}">
-                                    <img class="w-16 rounded-full" src="{{ asset('storage/profiles' .'/' . $follower->image) }}">
-                                </a>
-                                <span class="text-xs text-gray-500">
-                                    {{ $follower->username }}
-                                </span>
-                            </div>
+                                <div class="flex flex-col items-center space-y-2">
+                                    <a class="block bg-white p-1 rounded-full"
+                                        href="{{ route('post.index', $follower->username) }}">
+                                        <img class="w-16 rounded-full" src="{{ $follower->image() }}">
+                                    </a>
+                                    <span class="text-xs text-gray-500">
+                                        {{ $follower->username }}
+                                    </span>
+                                </div>
                             @endforeach
                         </ul>
                     </x-card-content>
@@ -230,7 +231,14 @@
                         <x-post-card :post="$post" :user="$user" />
                     @endforeach
                 @else
-                    <p class="text-center">No post yet</p>
+                    <div class="flex flex-col items-center justify-center min-h-screen">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="h-12 w-12 text-gray-500 mb-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                            </path>
+                        </svg>
+                        <p class="text-center text-gray-500 text-2xl">No posts yet</p>
+                    </div>
                 @endif
             </article>
         </main>

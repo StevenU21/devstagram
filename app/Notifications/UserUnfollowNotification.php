@@ -37,7 +37,7 @@ class UserUnfollowNotification extends Notification
         $url = route($routeName, $routeParams);
 
         // foto de perfil de la persona que me esta siguiendo
-        $imgurl = $this->follower->url();
+        $imgurl = $this->follower->image();
 
         return [
             'user_name' => $this->follower->username,

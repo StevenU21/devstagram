@@ -37,7 +37,7 @@ class DeletedPostNotification extends Notification
 
     public function toDatabase(object $notifiable): array
     {
-        $imgurl = $this->post->user->url();
+        $imgurl = $this->post->user->image();
 
         $routeName = 'post.index'; // Nombre de la ruta
         $routeParams = ['user' => $this->follower->username]; // Parámetros de la ruta

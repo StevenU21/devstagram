@@ -10,7 +10,7 @@
     @foreach ($users as $user)
         <li class="px-4 py-2 hover:bg-gray-200 cursor-pointer user-item flex items-center">
             <img class="h-8 w-8 bg-white p-1 rounded-full shadow mr-2"
-                src="{{ asset('storage/profiles/' . $user->image) }}" alt="">
+                src="{{ $user->image()) }}" alt="">
             {{ $user->username }}
         </li>
     @endforeach

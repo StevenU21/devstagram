@@ -7,14 +7,13 @@ $userId = auth()->user()->id;
 
 $users = User::query()
     ->select('users.*')
-    ->leftJoin('followers', function($join) use ($userId) {
-        $join->on('users.id', '=', 'followers.user_id')
-             ->where('followers.follower_id', '=', $userId);
+    ->leftJoin('followers', function ($join) use ($userId) {
+        $join->on('users.id', '=', 'followers.user_id')->where('followers.follower_id', '=', $userId);
     })
     ->whereNull('followers.user_id')
+    ->where('users.id', '!=', $userId) //Evitar que el usuario se siga a si mismo
     ->limit(10)
     ->get();
-
 ?>
 
 <x-card class="bg-white rounded-md p-4 shadow-md mt-6 w-full">
@@ -23,7 +22,7 @@ $users = User::query()
         @foreach ($users as $user)
             <div class="flex items-center">
                 <a class="block bg-white p-1 rounded-full" href="{{ route('post.index', $user->username) }}">
-                    <img class="w-10 rounded-full" src="{{ asset('storage/profiles' . '/' . $user->image) }}">
+                    <img class="w-10 rounded-full" src="{{ $user->image() }}">
                 </a>
                 <div>
                     <a class="text-xs font-bold block bg-white p-1 rounded-full"
@@ -50,7 +49,7 @@ $users = User::query()
                         </x-button>
                     </form>
                 @endif
-                </div>
+            </div>
         @endforeach
     </x-card-content>
 </x-card>
