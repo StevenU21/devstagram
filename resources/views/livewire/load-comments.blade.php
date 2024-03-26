@@ -1,13 +1,16 @@
  <x-card-footer class="flex space-y-4 overflow-y-auto max-h-48">
      @forelse ($comments as $comment)
-         <x wire:key="{{ $comment->id }}">
-             <img class="w-10 h-10 rounded-full" src="{{ asset('storage/profiles' . '/' . $comment->user->image) }}"
-                 alt="User profile picture">
-             <div class="space-y-1">
-                 <p class="font-semibold text-sm text-blue-600">{{ $comment->user->username }}</p>
-                 <p class="text-sm text-gray-700">{{ $comment->comment }}</p>
+         <div class="text-black p-4 antialiased flex">
+             <img class="rounded-full h-8 w-8 mr-2 mt-1 "
+                 src="{{ asset('storage/profiles' . '/' . $comment->user->image) }}" alt="User profile picture"/>
+             <div>
+                 <div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
+                     <div class="font-semibold text-sm leading-relaxed">{{ $comment->user->username }}</div>
+                     <div class="text-xs leading-snug md:leading-normal">{{ $comment->comment }}</div>
+                 </div>
+                 <div class="text-xs  mt-0.5 text-gray-500">14 w</div>
              </div>
-         </x>
+         </div>
      @empty
          <p>No comments yet</p>
      @endforelse
