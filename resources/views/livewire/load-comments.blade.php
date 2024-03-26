@@ -1,6 +1,6 @@
  <x-card-footer class="flex space-y-4 overflow-y-auto max-h-48">
      @forelse ($comments as $comment)
-         <div class="text-black p-4 antialiased flex">
+         <div class="text-black antialiased flex">
              <img class="rounded-full h-8 w-8 mr-2 mt-1 "
                  src="{{ asset('storage/profiles' . '/' . $comment->user->image) }}" alt="User profile picture"/>
              <div>
