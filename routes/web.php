@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,11 @@ Route::post('/logout', [LogOutController::class, 'store'])->name('logout');
 //hacer un grupo de rutas para que solo se pueda acceder a ellas si estas logueado
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', HomeController::class)->name('home');
+
+    //Rutas para el Search
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search/autocomplete', [SearchController::class, 'autocomplete'])->name('search.autocomplete');
+
     // Rutas para el perfil
     Route::get('/profile', [PerfilController::class, 'index'])->name('perfil.index');
     Route::put('/profile', [PerfilController::class, 'update'])->name('perfil.update');

@@ -100,3 +100,62 @@ window.addEventListener("commented", (event) => {
         position: "top-end",
     });
 });
+
+//funcion de busqueda y autocompletado
+
+// despues de buscar a un post el autocomplete deja funcionar
+// cosa que no pasa si busco a un usuario
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const searchInput = document.getElementById("searchInput");
+//     const searchResult = document.getElementById("searchResult");
+
+//     function closeSearchResults() {
+//         searchResult.style.display = "none";
+//     }
+
+//     function search(query) {
+//         if (query !== "") {
+//             fetch(`/search/autocomplete?query=${query}`)
+//                 .then((response) => {
+//                     if (!response.ok) {
+//                         throw new Error("Network response was not ok");
+//                     }
+//                     return response.text();
+//                 })
+//                 .then((data) => {
+//                     searchResult.innerHTML = data;
+//                     searchResult.style.display = "block";
+//                 })
+//                 .catch((error) => console.error("Error fetching data:", error));
+//         } else {
+//             closeSearchResults();
+//         }
+//     }
+
+//     document.addEventListener("click", function (event) {
+//         if (!searchResult.contains(event.target)) {
+//             closeSearchResults();
+//         }
+//     });
+
+//     document.addEventListener("click", function (event) {
+//         if (event.target.tagName === "LI") {
+//             const text = event.target.textContent.trim();
+//             searchInput.value = text;
+//             closeSearchResults();
+
+//             if (
+//                 event.target.classList.contains("user-item") ||
+//                 event.target.classList.contains("post-item")
+//             ) {
+//                 event.target.closest("form").submit();
+//             }
+//         }
+//     });
+
+//     searchInput.addEventListener("keyup", function () {
+//         const query = this.value.trim();
+//         search(query);
+//     });
+// });
