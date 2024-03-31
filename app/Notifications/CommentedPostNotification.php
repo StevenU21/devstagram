@@ -2,7 +2,9 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
 class CommentedPostNotification extends Notification
@@ -30,7 +32,7 @@ class CommentedPostNotification extends Notification
 
     public function toBroadcast($notifiable)
     {
-        return $this->toArray($notifiable);
+        return new BroadcastMessage($this->toArray($notifiable));
     }
 
     public function toArray($notifiable): array
@@ -45,5 +47,15 @@ class CommentedPostNotification extends Notification
             'url' => $url,
             'profile_image' => $imgurl,
         ];
+    }
+
+    public function broadcastOn()
+    {
+        return new Channel('notifications.' . $this->post->user->id);
+    }
+
+    public function broadcastType()
+    {
+        return 'commented-post';
     }
 }

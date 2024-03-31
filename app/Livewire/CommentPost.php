@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Events\NewPostComent;
 use App\Models\Comment;
 use App\Notifications\CommentedPostNotification;
 use Livewire\Component;
