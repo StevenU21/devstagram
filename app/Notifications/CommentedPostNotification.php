@@ -3,8 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class CommentedPostNotification extends Notification
@@ -22,10 +20,20 @@ class CommentedPostNotification extends Notification
 
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toDatabase($notifiable)
+    {
+        return $this->toArray($notifiable);
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return $this->toArray($notifiable);
+    }
+
+    public function toArray($notifiable): array
     {
         $url = route('post.show', ['user' => $this->post->user->username, 'post' => $this->post->id]);
         $imgurl = $this->commenter->image();

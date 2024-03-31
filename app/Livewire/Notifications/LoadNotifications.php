@@ -20,6 +20,11 @@ class LoadNotifications extends Component
         $this->notifications = $user->Notifications;
     }
 
+    public function render()
+    {
+        return view('livewire.notifications.load-notifications');
+    }
+
     public function markAsRead($notificationId)
     {
         $notification = auth()->user()->notifications()->find($notificationId);
@@ -34,7 +39,7 @@ class LoadNotifications extends Component
     public function toggleAllNotifications()
     {
         $user = auth()->user();
-    
+
         if ($user->unreadNotifications->isEmpty()) {
             $user->readNotifications->each(function ($notification) {
                 $notification->markAsUnread();
@@ -42,7 +47,7 @@ class LoadNotifications extends Component
         } else {
             $user->unreadNotifications->markAsRead();
         }
-    
+
         $this->loadNotifications(); // Actualizar después de marcar/desmarcar todas
     }
 
@@ -60,10 +65,5 @@ class LoadNotifications extends Component
             $notification->markAsRead();
             return redirect($notification->data['url']);
         }
-    }
-
-    public function render()
-    {
-        return view('livewire.notifications.load-notifications');
     }
 }

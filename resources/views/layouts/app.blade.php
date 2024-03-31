@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @vite('resources/js/broadcast.js')  
     @livewireStyles
 </head>
 

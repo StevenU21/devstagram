@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\NewPostComent;
 use App\Models\Comment;
 use App\Notifications\CommentedPostNotification;
 use Livewire\Component;
@@ -33,7 +34,6 @@ class CommentPost extends Component
 
         // Enviar notificación al usuario que creó el post
         $this->post->user->notify(new CommentedPostNotification($this->post, auth()->user()));
-
         $this->dispatch('commented');
         $this->reset('comment');
     }
