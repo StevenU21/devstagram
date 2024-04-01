@@ -2,25 +2,26 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Broadcast;
 
 class DeletedPostNotification extends Notification
 {
     use Queueable;
     public $post;
-    public $user;
     public $follower;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($post, $user, $follower)
+    public function __construct($post, $follower)
     {
         $this->post = $post;
-        $this->user = $user;
         $this->follower = $follower;
     }
 
@@ -31,11 +32,20 @@ class DeletedPostNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
-
     public function toDatabase(object $notifiable): array
+    {
+        return $this->toArray($notifiable);
+    }
+
+    public function toBroadcast($notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage($this->toArray($notifiable));
+    }
+
+    public function toArray($notifiable): array
     {
         $imgurl = $this->post->user->image();
 
@@ -50,5 +60,15 @@ class DeletedPostNotification extends Notification
             'url' => $url,
             'profile_image' => $imgurl,
         ];
+    }
+
+    public function broadcastOn()
+    {
+        return new PrivateChannel('notifications.' . $this->follower->id);
+    }
+
+    public function broadcastType()
+    {
+        return 'deleted-post';
     }
 }

@@ -52,6 +52,14 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('delete', $post);
+
+        $followers = auth()->user()->followers;
+
+        foreach ($followers as $follower) {
+            $notification = new DeletedPostNotification($post, $follower);
+            $follower->notify($notification);
+        }
+
         $post->delete();
 
         // Delte image
@@ -61,11 +69,6 @@ class PostController extends Controller
             unlink($image_path);
         }
 
-        $followers = auth()->user()->followers;
-
-        foreach ($followers as $follower) {
-            $follower->notify(new DeletedPostNotification($post, auth()->user(), $follower));
-        }
 
         return redirect()->route('post.index', auth()->user()->username)->with('deleted', 'Post ha sido eliminado.');
     }
