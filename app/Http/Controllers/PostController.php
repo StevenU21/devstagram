@@ -8,16 +8,17 @@ use App\Notifications\CreatedPostNotification;
 use App\Notifications\DeletedPostNotification;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 
 class PostController extends Controller
 {
     public function index(User $user)
     {
         $posts = Post::with('user')
-        ->where('user_id', $user->id)
-        ->orderBy('created_at', 'desc')
-        ->limit(10)
-        ->get();
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get();
         return view('layouts.dashboard', [
             'user' => $user,
             'posts' => $posts
@@ -31,7 +32,7 @@ class PostController extends Controller
             'image' => ['required']
         ]);
 
-        Post::create([
+        $post = Post::create([
             'title' => '',
             'text' => $request->title,
             'image' => $request->image,
@@ -41,7 +42,8 @@ class PostController extends Controller
         $followers = auth()->user()->followers;
 
         foreach ($followers as $follower) {
-            $follower->notify(new CreatedPostNotification(auth()->user()->posts->last()));
+            $notification = new CreatedPostNotification($post, $follower);
+            $follower->notify($notification);
         }
 
         return redirect()->route('post.index', auth()->user()->username)->with('success', 'Post ha sido creado.');

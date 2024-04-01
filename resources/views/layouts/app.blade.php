@@ -12,10 +12,6 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     @vite('resources/js/broadcast.js')
-
-    <script>
-        const userId = '{{ auth()->id() }}';
-    </script>
     @livewireStyles
 </head>
 
@@ -104,8 +100,14 @@
         });
     </script>
 
-    <script src="{{ asset('js/ion.sound.js') }}"></script>
-    <script src="{{ asset('js/ion.sound.min.js') }}"></script>
+    @auth
+        <script>
+            const user_id = {{ auth()->user()->id }}
+        </script>
+    @endauth
+
+    {{-- <script src="{{ asset('js/ion.sound.js') }}"></script>
+    <script src="{{ asset('js/ion.sound.min.js') }}"></script> --}}
     @livewireScripts
 </body>
 

@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
@@ -51,7 +53,7 @@ class CommentedPostNotification extends Notification
 
     public function broadcastOn()
     {
-        return new Channel('notifications.' . $this->post->user->id);
+        return new PrivateChannel('notifications.' . $this->post->user->id);
     }
 
     public function broadcastType()

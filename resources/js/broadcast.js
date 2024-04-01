@@ -13,11 +13,10 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
-
-window.Echo.channel('notifications.' + userId)
+window.Echo.private('notifications.' + user_id)
     .listen('.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
-        console.log('Evento recibido:', notification);
-        const messageText = `${notification.user_name} ${notification.message} (creado ${notification.notification_created_at})`;
+        // console.log('Evento recibido:', notification);
+        const messageText = `${notification.user_name} ${notification.message} (hace ${notification.notification_created_at})`;
 
         Toastify({
             text: messageText,
