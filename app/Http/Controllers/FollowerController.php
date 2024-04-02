@@ -17,7 +17,7 @@ class FollowerController extends Controller
         $user->followers()->attach(auth()->user()->id);
 
         // Enviar notificación al usuario que está siendo seguido.
-        $user->notify(new UserFollowedNotification(auth()->user()));
+        $user->notify(new UserFollowedNotification(auth()->user(), $user));
 
         return redirect()->back()->with('success', 'Has comenzado a seguir a ' . $user->username);
     }

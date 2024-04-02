@@ -2,20 +2,24 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
 class UserFollowedNotification extends Notification
 {
     use Queueable;
     protected $follower;
+    public $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($follower)
+    public function __construct($follower, $user)
     {
         $this->follower = $follower;
+        $this->user = $user;
     }
 
     /**
@@ -25,10 +29,20 @@ class UserFollowedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
-    public function toDatabase($notifiable)
+    public function toDatabase($notifiable): array
+    {
+        return $this->toArray($notifiable);
+    }
+
+    public function toBroadcast($notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage($this->toArray($notifiable));
+    }
+
+    public function toArray($notifiable)
     {
         $routeName = 'post.index'; // Nombre de la ruta
         $routeParams = ['user' => $this->follower->username]; // Parámetros de la ruta
@@ -44,5 +58,15 @@ class UserFollowedNotification extends Notification
             'url' => $url,
             'profile_image' => $imgurl,
         ];
+    }
+
+    public function broadcastOn()
+    {
+        return new PrivateChannel('notifications.' . $this->user->id);
+    }
+
+    public function broadcastType()
+    {
+        return 'user-followed';
     }
 }
