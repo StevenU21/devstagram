@@ -27,8 +27,8 @@ class FollowerController extends Controller
         $user->followers()->detach(auth()->user()->id);
 
         // Enviar notificación al usuario que ha dejado de ser seguido.
-        $user->notify(new UserUnfollowNotification(auth()->user()));
+        $user->notify(new UserUnfollowNotification(auth()->user(), $user));
 
-        return back();
+        return redirect()->back()->with('deleted', 'Has dejado de seguir a ' . $user->username);
     }
 }
