@@ -20,6 +20,14 @@ class LoadNotifications extends Component
         $this->notifications = $user->Notifications;
     }
 
+    public function getListeners()
+    {
+        return [
+            'echo-private:notifications.' . Auth::id() . ',.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated' => 'loadNotifications',
+            'notificationReceived' => 'loadNotifications'
+        ];
+    }
+
     public function render()
     {
         return view('livewire.notifications.load-notifications');

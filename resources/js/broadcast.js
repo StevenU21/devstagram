@@ -39,3 +39,7 @@ window.Echo.private('notifications.' + user_id)
             },
         }).showToast();
     });
+
+document.addEventListener('livewire:load', function () {
+    window.livewire.emit('notificationReceived');
+});
