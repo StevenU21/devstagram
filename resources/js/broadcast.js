@@ -16,11 +16,11 @@ window.Echo = new Echo({
 window.Echo.private('notifications.' + user_id)
     .listen('.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', (notification) => {
         // console.log('Evento recibido:', notification);
-        const messageText = `${notification.user_name} ${notification.message} (hace ${notification.notification_created_at})`;
+        const messageText = `${notification.user_name} ${notification.message} (${notification.notification_created_at})`;
 
         Toastify({
             text: messageText,
-            duration: 3000,
+            duration: -1,
             destination: notification.url,
             newWindow: true,
             close: true,
@@ -31,12 +31,15 @@ window.Echo.private('notifications.' + user_id)
                 window.location.href = notification.url;
             },
             style: {
-                color: '#fff',
-                borderRadius: '8px',
-                padding: '12px',
                 display: 'flex',
-                alignItems: 'center',
+                'text-align': 'left',
+                'box-sizing': 'border-box',
+                'color': '#fff',
+                'border-radius': '1vw',
+                'padding': '1vw',
+                'width': '30rem',
             },
+            className: 'toastify-notification',
         }).showToast();
     });
 

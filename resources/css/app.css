@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Media Query para las Notificaciones */
+@media only screen and (min-width: 361px) and (max-width: 428px) {
+    .toastify-notification {
+        width: 10rem;
+        padding: 2.5vw;
+        font-size: 4vw;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 360px) {
+    .toastify-notification {
+        width: 85%;
+        padding: 3vw;
+        font-size: 4vw;
+    }
+}
