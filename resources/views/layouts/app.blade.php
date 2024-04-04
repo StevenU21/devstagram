@@ -18,18 +18,18 @@
 <body class="overflow-x-hidden">
     <header class="p-2 border-b shadow w-screen sticky z-[100] bg-white flex top-0">
         <nav class="bg-white w-full flex relative justify-between items-center px-8">
-
+    
             <a href="{{ route('home') }}" class="font-bold text-2xl"> DevStagram </a>
             <!-- end logo -->
-
+    
             <!-- search bar -->
             <!-- <div class="hidden sm:block flex-shrink flex-grow-0 justify-start px-2"> -->
             @if (!Route::is('login') && !Route::is('register') && !Route::is('perfil.index'))
-                <form action="{{ route('search') }}" method="GET" class="max-w-xl relative">
+                <form action="{{ route('search') }}" method="GET" class="max-w-xl relative hidden sm:block">
                     <x-label variant="icon">
                         <x-input type="text" id="searchInput" name="searchInput" placeholder="Search something..." />
                         <div id="searchResult" style="display: none;"></div>
-
+    
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -50,7 +50,7 @@
                 @auth
                     <div class="flex items-center justify-center gap-4">
                         @livewire('notifications.load-notifications')
-
+    
                         <div class="block relative">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -74,9 +74,10 @@
                 @endauth
                 <!-- end login -->
             </div>
-
+    
         </nav>
     </header>
+    
     <main class="bg-gray-100 min-h-screen">@yield('content')</main>
 
     @include('components.alerts')

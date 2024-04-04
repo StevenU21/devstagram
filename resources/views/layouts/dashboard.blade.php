@@ -228,9 +228,12 @@
 
             <article>
                 @if ($posts->count())
-                    @foreach ($posts as $post)
-                        <x-post-card :post="$post" :user="$user" />
-                    @endforeach
+                    <div class="py-6">
+                        @foreach ($posts as $post)
+                            <x-post-card :post="$post" :user="$user" />
+                        @endforeach
+                        {{ $posts->links() }}
+                    </div>
                 @else
                     <div class="flex flex-col items-center justify-center min-h-screen">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"

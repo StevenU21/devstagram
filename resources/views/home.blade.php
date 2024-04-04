@@ -10,6 +10,7 @@
                     @foreach ($posts as $post)
                         <x-post-card :post="$post" />
                     @endforeach
+                    {{ $posts->links() }}
                 </div>
             @else
                 <div class="flex flex-col items-center justify-center h-screen">

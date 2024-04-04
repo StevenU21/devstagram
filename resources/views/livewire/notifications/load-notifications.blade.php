@@ -1,5 +1,5 @@
 <div>
-    <div class="relative inline-block text-left">
+    <div class="relative inline-block text-left  max-w-xl relative hidden sm:block">
         @if ($notifications->isEmpty())
             <x-button variant="icon" id="dropdownButton">
                 <!-- Icono de la campana -->

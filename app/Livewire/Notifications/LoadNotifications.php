@@ -17,7 +17,7 @@ class LoadNotifications extends Component
     public function loadNotifications()
     {
         $user = Auth::user();
-        $this->notifications = $user->Notifications;
+        $this->notifications = $user->notifications()->latest()->take(10)->get();
     }
 
     public function getListeners()
