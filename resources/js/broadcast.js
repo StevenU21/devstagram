@@ -20,7 +20,7 @@ window.Echo.private('notifications.' + user_id)
 
         Toastify({
             text: messageText,
-            duration: -1,
+            duration: 2500,
             destination: notification.url,
             newWindow: true,
             close: true,

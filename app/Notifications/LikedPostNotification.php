@@ -47,7 +47,7 @@ class LikedPostNotification extends Notification
 
         return [
             'user_name' => $this->liker->username,
-            'message' => 'Le dió like al post: ' . $this->post->text,
+            'message' => 'Le dió un ❤️ al post: ' . $this->post->text,
             'notification_created_at' => now()->diffForHumans(),
             'url' => $url,
             'profile_image' => $imgurl,
