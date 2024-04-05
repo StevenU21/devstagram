@@ -33,7 +33,6 @@ class CommentPost extends Component
 
         // Enviar notificación al usuario que creó el post
         $this->post->user->notify(new CommentedPostNotification($this->post, auth()->user()));
-
         $this->dispatch('commented');
         $this->reset('comment');
     }

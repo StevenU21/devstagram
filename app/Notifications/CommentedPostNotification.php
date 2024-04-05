@@ -2,9 +2,11 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
 class CommentedPostNotification extends Notification
@@ -22,10 +24,20 @@ class CommentedPostNotification extends Notification
 
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toDatabase($notifiable)
+    {
+        return $this->toArray($notifiable);
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage($this->toArray($notifiable));
+    }
+
+    public function toArray($notifiable): array
     {
         $url = route('post.show', ['user' => $this->post->user->username, 'post' => $this->post->id]);
         $imgurl = $this->commenter->image();
@@ -37,5 +49,15 @@ class CommentedPostNotification extends Notification
             'url' => $url,
             'profile_image' => $imgurl,
         ];
+    }
+
+    public function broadcastOn()
+    {
+        return new PrivateChannel('notifications.' . $this->post->user->id);
+    }
+
+    public function broadcastType()
+    {
+        return 'commented-post';
     }
 }

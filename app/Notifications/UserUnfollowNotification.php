@@ -2,8 +2,11 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\BroadcastManager;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -11,13 +14,15 @@ class UserUnfollowNotification extends Notification
 {
     use Queueable;
     protected $follower;
+    public $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($follower)
+    public function __construct($follower, $user)
     {
         $this->follower = $follower;
+        $this->user = $user;
     }
 
     /**
@@ -27,10 +32,20 @@ class UserUnfollowNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toDatabase($notifiable)
+    {
+        return $this->toArray($notifiable);
+    }
+
+    public function toBroadcast($notifiable): BroadcastMessage
+    {
+        return new BroadcastMessage($this->toDatabase($notifiable));
+    }
+
+    public function toArray($notifiable)
     {
         $routeName = 'post.index'; // Nombre de la ruta
         $routeParams = ['user' => $this->follower->username]; // Parámetros de la ruta
@@ -46,5 +61,15 @@ class UserUnfollowNotification extends Notification
             'url' => $url,
             'profile_image' => $imgurl,
         ];
+    }
+
+    public function broadcastOn()
+    {
+        return new PrivateChannel('notifications.' . $this->user->id);
+    }
+
+    public function broadcastType()
+    {
+        return 'user-unfollowed';
     }
 }

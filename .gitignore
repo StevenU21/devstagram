@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/sounds
 /public/uploads/*
 /public/profiles/*
 /storage/*.key

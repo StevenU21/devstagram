@@ -1,5 +1,5 @@
 <div>
-    <div class="relative inline-block text-left">
+    <div class="relative inline-block text-left  max-w-xl relative hidden sm:block">
         @if ($notifications->isEmpty())
             <x-button variant="icon" id="dropdownButton">
                 <!-- Icono de la campana -->
@@ -20,7 +20,6 @@
                 </svg>
             </x-button>
         @endif
-
 
         <div id="dropdownContent"
             class="absolute right-0 mt-1 w-[350px] mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
@@ -62,7 +61,8 @@
                                 </p>
                                 <p class="text-gray-600">{{ $notification->created_at->diffForHumans() }}</p>
                             </div>
-                            <span  class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-{{ $notification->read_at ? 'green' : 'red' }}-500 rounded-full">
+                            <span
+                                class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-{{ $notification->read_at ? 'green' : 'red' }}-500 rounded-full">
                                 {{ $notification->read_at ? 'Leído' : 'No leído' }}
                             </span>
                         </a>
@@ -71,5 +71,4 @@
             </x-card>
         </div>
     </div>
-
 </div>
