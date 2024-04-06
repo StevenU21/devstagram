@@ -10,7 +10,7 @@
                     class="text-gray-600 text-sm font-semibold">{{ $post->user->username }}</a>
                 <div class="flex w-full mt-1">
                     <div class="text-blue-700 font-base text-xs mr-1 cursor-pointer">
-                        SEO
+                        {{ strtoupper($post->user->role) }}
                     </div>
                     <div class="text-gray-400 font-thin text-xs">
                         {{ $post->created_at->diffForHumans() }}
@@ -36,8 +36,11 @@
     </div>
     <div class="border-b border-gray-100"></div>
     <div class="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2 ">
-        <img class="h-full w-full object-cover rounded-xl" src="{{ asset('uploads') . '/' . $post->image }}"
-            alt="">
+        <a href="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
+            <img class="h-full w-full object-cover rounded-xl" src="{{ asset('uploads') . '/' . $post->image }}"
+                alt="">
+        </a>
+
     </div>
     <div class="text-gray-500 text-sm mb-4 mx-3 px-2">
         {{ $post->text }}
@@ -70,7 +73,7 @@
 
 
         <div class="flex justify-end w-full mt-1 pt-2 pr-5">
-            <x-link variant="icon" href="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
+            <x-link variant="icon" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -112,4 +115,3 @@
     <livewire:load-comments :post="$post" />
     {{-- fin comentarios --}}
 </div>
-

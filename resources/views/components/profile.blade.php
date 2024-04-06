@@ -6,16 +6,16 @@
                     if (this.open) {
                         return this.close()
                     }
-
+            
                     this.$refs.button.focus()
-
+            
                     this.open = true
                 },
                 close(focusAfter) {
                     if (!this.open) return
-
+            
                     this.open = false
-
+            
                     focusAfter && focusAfter.focus()
                 }
             }" x-on:keydown.escape.prevent.stop="close($refs.button)"
@@ -39,18 +39,19 @@
 
                     <a href="{{ route('post.index', auth()->user()->username) }}"
                         class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                        Perfil
+                        <i class="fas fa-user mr-2"></i> Perfil
                     </a>
 
                     <a href="{{ route('perfil.update', auth()->user()->username) }}"
                         class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                        Editar Perfil
+                        <i class="fas fa-edit mr-2"></i> Editar Perfil
                     </a>
+
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" variant="icon"
                             class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                            Cerrar sesion
+                            <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
                         </button>
                     </form>
                 </div>

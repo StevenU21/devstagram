@@ -30,6 +30,20 @@
                     @enderror
                 </div>
 
+                <!-- Role -->
+                <div class="mb-6">
+                    <x-label for="role">Role</x-label>
+                    <x-input name="role" id="role" type="text"
+                        class="mt-1 p-2 h-10 w-full rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                        placeholder="Role/Ocupation" value="{{ old('role', auth()->user()->role) }}" />
+
+                    @error('username')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <!-- Descripcion -->
                 <div class="mb-6">
                     <x-label for="description">Description</x-label>
