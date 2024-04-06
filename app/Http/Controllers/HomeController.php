@@ -14,7 +14,7 @@ class HomeController extends Controller
         $posts = Post::with(['user', 'likes', 'comments'])
             ->whereIn('user_id', $followingIds)
             ->latest()
-            ->paginate(5);
+            ->paginate(15);
 
         return view('home', [
             'posts' => $posts,
