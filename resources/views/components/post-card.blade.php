@@ -115,8 +115,8 @@
                 });
             </script>
 
-            <x-link variant="icon" href="#" id="copyLink"
-                data-url="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
+<x-link variant="icon" href="#" class="copyLink"
+    data-url="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -161,24 +161,26 @@
 
 <script src="https://cdn.jsdelivr.net/clipboard.js/2.0.0/clipboard.min.js"></script>
 <script>
-    document.getElementById('copyLink').addEventListener('click', function(event) {
-        event.preventDefault();
-        var postUrl = this.getAttribute('data-url');
+    document.querySelectorAll('.copyLink').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            var postUrl = this.getAttribute('data-url');
 
-        var tempInput = document.createElement('input');
-        tempInput.value = postUrl;
-        document.body.appendChild(tempInput);
+            var tempInput = document.createElement('input');
+            tempInput.value = postUrl;
+            document.body.appendChild(tempInput);
 
-        tempInput.select();
-        document.execCommand('copy');
+            tempInput.select();
+            document.execCommand('copy');
 
-        document.body.removeChild(tempInput);
+            document.body.removeChild(tempInput);
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: 'URL copiada al portapapeles',
-            showConfirmButton: true,
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'URL copiada al portapapeles',
+                showConfirmButton: true,
+            });
         });
     });
 </script>
