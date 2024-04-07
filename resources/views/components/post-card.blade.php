@@ -72,14 +72,14 @@
         <livewire:user-liked-post :postId="$post->id" />
 
         @php
-        $url = route('post.show', ['post' => $post, 'user' => $post->user]);
-        $title = $post->title;
-        $platforms = [
-            'Facebook' => ['url' => 'https://www.facebook.com/sharer/sharer.php?u=', 'color' => 'blue'],
-            'Twitter' => ['url' => 'https://twitter.com/intent/tweet?url=', 'color' => 'blue'],
-            'Pinterest' => ['url' => 'https://pinterest.com/pin/create/button/?url=', 'color' => 'red'],
-        ];
-    @endphp
+            $url = route('post.show', ['post' => $post, 'user' => $post->user]);
+            $title = $post->title;
+            $platforms = [
+                'Facebook' => ['url' => 'https://www.facebook.com/sharer/sharer.php?u=', 'color' => 'blue'],
+                'Twitter' => ['url' => 'https://twitter.com/intent/tweet?url=', 'color' => 'blue'],
+                'Pinterest' => ['url' => 'https://pinterest.com/pin/create/button/?url=', 'color' => 'red'],
+            ];
+        @endphp
         <div class="flex justify-end w-full mt-1 pt-2 pr-5 space-x-2">
             <div id="dropdownMenu" class="relative">
                 <button onclick="toggleDropdown(event)" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded">
@@ -90,14 +90,17 @@
                         </path>
                     </svg>
                 </button>
-            
-                <div id="dropdown" class="absolute bg-white rounded shadow-md bottom-full py-1 w-48 hidden">
+
+
+                <div class="dropdown absolute bg-white rounded shadow-md bottom-full py-1 w-48 hidden">
                     @foreach ($platforms as $name => $platform)
                         @php
                             $shareUrl = $platform['url'] . urlencode($url) . '&title=' . urlencode($title);
                         @endphp
-                        <a href="{{ $shareUrl }}" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fab fa-{{ strtolower($name) }}-square text-{{ $platform['color'] }}-600 mr-2"></i>{{ $name }}
+                        <a href="{{ $shareUrl }}" target="_blank"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i
+                                class="fab fa-{{ strtolower($name) }}-square text-{{ $platform['color'] }}-600 mr-2"></i>{{ $name }}
                         </a>
                     @endforeach
                 </div>
@@ -105,18 +108,19 @@
             <script>
                 function toggleDropdown(event) {
                     event.stopPropagation();
-                    var dropdown = document.getElementById("dropdown");
+                    var dropdown = event.currentTarget.parentNode.querySelector('.dropdown');
                     dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
                 }
-
+            
                 document.addEventListener('click', function(event) {
-                    var dropdown = document.getElementById("dropdown");
-                    dropdown.style.display = "none";
+                    document.querySelectorAll(".dropdown").forEach(function(dropdown) {
+                        dropdown.style.display = "none";
+                    });
                 });
             </script>
 
-<x-link variant="icon" href="#" class="copyLink"
-    data-url="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
+            <x-link variant="icon" href="#" class="copyLink"
+                data-url="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round"
