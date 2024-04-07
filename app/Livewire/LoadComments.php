@@ -13,7 +13,7 @@ class LoadComments extends Component
     use WithPagination;
 
     public $post;
-    public $commentsPerPage = 10;
+    public $commentsPerPage = 5;
     public $comments = [];
     private $paginator;
 
@@ -36,7 +36,7 @@ class LoadComments extends Component
 
     public function loadMore()
     {
-        $this->commentsPerPage += 15;
+        $this->commentsPerPage += 10;
         $this->loadComments();
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,8 @@ class HomeController extends Controller
         $posts = Post::with(['user', 'likes', 'comments'])
             ->whereIn('user_id', $followingIds)
             ->latest()
-            ->paginate(15);
+            ->paginate(5);
+
 
         return view('home', [
             'posts' => $posts,
