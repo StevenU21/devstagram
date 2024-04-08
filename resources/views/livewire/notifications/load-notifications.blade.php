@@ -1,5 +1,5 @@
 <div>
-    <div class="relative inline-block text-left  max-w-xl relative hidden sm:block">
+    <div class="relative inline-block text-left">
         @if ($notifications->isEmpty())
             <x-button variant="icon" id="dropdownButton">
                 <!-- Icono de la campana -->
@@ -22,7 +22,7 @@
         @endif
 
         <div id="dropdownContent"
-            class="absolute right-0 mt-1 w-[350px] mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10"
+            class="absolute right-0 mt-1 w-[310px] sm:w-[350px] sm:ml-0 mx-auto bg-white rounded-lg shadow-lg overflow-auto max-h-96 z-10 translate-x-[87px] sm:translate-x-[10px]"
             style="display: none;">
             <!-- Encabezado -->
             <x-card class="border">
@@ -42,9 +42,9 @@
                         </x-button>
                         <x-button class="flex items-center gap-2" wire:click.prevent="toggleAllNotifications">
                             @if ($notifications->whereNull('read_at')->isEmpty())
-                                <i class="fas fa-eye-slash"></i> Desmarcar Todos
+                                <i class="fas fa-eye-slash"></i> Desmarcar
                             @else
-                                <i class="fas fa-eye"></i> Marcar Todos
+                                <i class="fas fa-eye"></i> Marcar
                             @endif
                         </x-button>
                     </div>
@@ -57,12 +57,13 @@
                                 src="{{ $notification->data['profile_image'] }}" alt="avatar">
                             <div class="text-sm space-y-1">
                                 <p class="text-gray-900 leading-none">{{ $notification->data['user_name'] }}</p>
-                                <p class="text-gray-600"> {{ Str::limit($notification->data['message'], 24) }}
+                                <p class="text-gray-600"> {{ Str::limit($notification->data['message'], 23) }}
                                 </p>
                                 <p class="text-gray-600">{{ $notification->created_at->diffForHumans() }}</p>
                             </div>
+
                             <span
-                                class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white bg-{{ $notification->read_at ? 'green' : 'red' }}-500 rounded-full">
+                                class="absolute top-1/2 transform -translate-y-1/2 right-4 px-2 py-0.5 text-xs text-white rounded-full {{ $notification->read_at ? 'bg-green-500' : 'bg-red-500' }}">
                                 {{ $notification->read_at ? 'Leído' : 'No leído' }}
                             </span>
                         </a>

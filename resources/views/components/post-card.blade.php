@@ -10,7 +10,7 @@
                     class="text-gray-600 text-sm font-semibold">{{ $post->user->username }}</a>
                 <div class="flex w-full mt-1">
                     <div class="text-blue-700 font-base text-xs mr-1 cursor-pointer">
-                        SEO
+                        {{ strtoupper($post->user->role) }}
                     </div>
                     <div class="text-gray-400 font-thin text-xs">
                         {{ $post->created_at->diffForHumans() }}
@@ -36,8 +36,11 @@
     </div>
     <div class="border-b border-gray-100"></div>
     <div class="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2 ">
-        <img class="h-full w-full object-cover rounded-xl" src="{{ asset('uploads') . '/' . $post->image }}"
-            alt="">
+        <a href="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
+            <img class="h-full w-full object-cover rounded-xl" src="{{ asset('uploads') . '/' . $post->image }}"
+                alt="">
+        </a>
+
     </div>
     <div class="text-gray-500 text-sm mb-4 mx-3 px-2">
         {{ $post->text }}
@@ -68,16 +71,63 @@
 
         <livewire:user-liked-post :postId="$post->id" />
 
+        @php
+            $url = route('post.show', ['post' => $post, 'user' => $post->user]);
+            $title = $post->title;
+            $platforms = [
+                'Facebook' => ['url' => 'https://www.facebook.com/sharer/sharer.php?u=', 'color' => 'blue'],
+                'Twitter' => ['url' => 'https://twitter.com/intent/tweet?url=', 'color' => 'blue'],
+                'Pinterest' => ['url' => 'https://pinterest.com/pin/create/button/?url=', 'color' => 'red'],
+            ];
+        @endphp
+        <div class="flex justify-end w-full mt-1 pt-2 pr-5 space-x-2">
+            <div id="dropdownMenu" class="relative">
+                <button onclick="toggleDropdown(event)" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z">
+                        </path>
+                    </svg>
+                </button>
 
-        <div class="flex justify-end w-full mt-1 pt-2 pr-5">
-            <x-link variant="icon" href="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z">
-                    </path>
+
+                <div class="dropdown absolute bg-white rounded shadow-md bottom-full py-1 w-48 hidden">
+                    @foreach ($platforms as $name => $platform)
+                        @php
+                            $shareUrl = $platform['url'] . urlencode($url) . '&title=' . urlencode($title);
+                        @endphp
+                        <a href="{{ $shareUrl }}" target="_blank"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i
+                                class="fab fa-{{ strtolower($name) }}-square text-{{ $platform['color'] }}-600 mr-2"></i>{{ $name }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <script>
+                function toggleDropdown(event) {
+                    event.stopPropagation();
+                    var dropdown = event.currentTarget.parentNode.querySelector('.dropdown');
+                    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+                }
+            
+                document.addEventListener('click', function(event) {
+                    document.querySelectorAll(".dropdown").forEach(function(dropdown) {
+                        dropdown.style.display = "none";
+                    });
+                });
+            </script>
+
+            <x-link variant="icon" href="#" class="copyLink"
+                data-url="{{ route('post.show', ['post' => $post, 'user' => $post->user]) }}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
                 </svg>
             </x-link>
+
             @auth
                 <livewire:like-post :post="$post" />
             @endauth
@@ -113,3 +163,28 @@
     {{-- fin comentarios --}}
 </div>
 
+<script src="https://cdn.jsdelivr.net/clipboard.js/2.0.0/clipboard.min.js"></script>
+<script>
+    document.querySelectorAll('.copyLink').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            var postUrl = this.getAttribute('data-url');
+
+            var tempInput = document.createElement('input');
+            tempInput.value = postUrl;
+            document.body.appendChild(tempInput);
+
+            tempInput.select();
+            document.execCommand('copy');
+
+            document.body.removeChild(tempInput);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'URL copiada al portapapeles',
+                showConfirmButton: true,
+            });
+        });
+    });
+</script>

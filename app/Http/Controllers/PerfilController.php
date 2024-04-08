@@ -27,6 +27,7 @@ class PerfilController extends Controller
                 'not_in:admin,twitter,facebook,instagram,github,linkedin,gitlab,profile',
             ],
             'description' => ['min:5', 'max:60', 'nullable', 'string'],
+            'role' => ['min:8', 'max:30', 'string'],
             'image' => ['image', 'max:4048', 'mimes:jpg,jpeg,png,gif,webp', 'dimensions:min_width=240,min_height=240'],
         ]);
 
@@ -40,6 +41,11 @@ class PerfilController extends Controller
         // Verificar si la descripción ha cambiado
         if ($user->description !== $request->description) {
             $user->description = $request->description;
+        }
+
+        // Verificar si el rol ha cambiado
+        if ($user->role !== $request->role) {
+            $user->role = $request->role;
         }
 
         // Procesar la imagen si se ha cargado una nueva
