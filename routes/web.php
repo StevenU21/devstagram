@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
@@ -61,6 +62,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.follow');
     Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');
 });
+
+// ---------Login con Google-----------
+Route::get('/google-auth/redirect', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('/google-auth/callback', [GoogleController::class, 'callback'])->name('google.callback');
 
 // Posts
 Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
