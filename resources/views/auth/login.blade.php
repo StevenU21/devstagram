@@ -28,6 +28,12 @@
                     Sign in with Google
                 </x-link>
 
+                <x-link href="{{ route('github.login') }}"
+                    class="bg-gray-600 text-white font-semibold px-6 py-3 rounded-lg flex items-center justify-center mb-8">
+                    <i class="fab fa-github text-white text-lg mr-2"></i>
+                    Sign in with Github
+                </x-link>
+
                 <!-- Formulario de inicio de sesión -->
                 <form class="bg-white max-sm:pt-16 w-full max-w-[20rem] space-y-2" action="{{ 'login' }}"
                     method="POST">

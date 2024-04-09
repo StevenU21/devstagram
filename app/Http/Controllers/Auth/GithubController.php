@@ -7,47 +7,46 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
-class GoogleController extends Controller
+class GithubController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
     public function callback()
     {
-        $userGoogle = Socialite::driver('google')->stateless()->user();
+        $userGithub = Socialite::driver('github')->stateless()->user();
 
-        // Verificar si el correo electrónico ya existe
-        $existingUser = User::all()->firstWhere('email', $userGoogle->email);
+        $existingUser = User::all()->firstWhere('email', $userGithub->email);
 
         if ($existingUser) {
-            $existingUser->google_id = $userGoogle->id;
+            $existingUser->github_id = $userGithub->id;
             $existingUser->save();
             $user = $existingUser;
         } else {
             $user = User::updateOrCreate(
                 [
-                    'google_id' => $userGoogle->id,
+                    'github_id' => $userGithub->id,
                 ],
                 [
-                    'name' => $userGoogle->name,
-                    'username' => explode(" ", $userGoogle->name)[0],
-                    'email' => $userGoogle->email,
+                    'name' => $userGithub->name,
+                    'username' => $userGithub->nickname,
+                    'email' => $userGithub->email,
                     'email_verified_at' => now(),
-                    'password' => bcrypt($userGoogle->token),
+                    'password' => bcrypt($userGithub->token),
                 ]
             );
 
-            $googleImage = file_get_contents($userGoogle->avatar);
-            if ($googleImage !== false) {
+            $githubImage = file_get_contents($userGithub->avatar);
+            if ($githubImage !== false) {
                 $slugName = Str::slug($user->name, '-');
-                $imageName =  $user->id . '-' . $slugName . '-googleImg.jpg';
+                $imageName =  $user->id . '-' . $slugName . '-githubImg.jpg';
                 $imagePath = 'profiles/' . $imageName;
-                Storage::disk('public')->put($imagePath, $googleImage);
+                Storage::disk('public')->put($imagePath, $githubImage);
 
                 $user->image = $imageName;
                 $user->save();
