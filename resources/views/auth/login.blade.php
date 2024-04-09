@@ -19,8 +19,11 @@
             <div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
             <div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         </div>
+
+        <!-- Hay que ajustar el diseño del login -->
         <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
-            <div class="flex flex-col items-center">
+            <div class="w-full max-w-xs">
+
                 <!-- Google Login Button -->
                 <x-link href="{{ route('google.login') }}"
                     class="bg-red-600 text-white font-semibold px-6 py-3 rounded-lg flex items-center justify-center mb-8">
@@ -28,6 +31,7 @@
                     Sign in with Google
                 </x-link>
 
+                <!-- Github Login Button -->
                 <x-link href="{{ route('github.login') }}"
                     class="bg-gray-600 text-white font-semibold px-6 py-3 rounded-lg flex items-center justify-center mb-8">
                     <i class="fab fa-github text-white text-lg mr-2"></i>
