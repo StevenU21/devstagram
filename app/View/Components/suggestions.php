@@ -24,7 +24,7 @@ class Suggestions extends Component
                 $join->on('users.id', '=', 'followers.user_id')->where('followers.follower_id', '=', $userId);
             })
             ->whereNull('followers.user_id')
-            ->where('users.id', '!=', $userId) //Evitar que el usuario se siga a si mismo
+            ->where('users.id', '!=', $userId) 
             ->limit(10)
             ->get();
     }

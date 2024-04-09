@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
@@ -66,6 +67,10 @@ Route::group(['middleware' => ['auth']], function () {
 // ---------Login con Google-----------
 Route::get('/google-auth/redirect', [GoogleController::class, 'redirect'])->name('google.login');
 Route::get('/google-auth/callback', [GoogleController::class, 'callback'])->name('google.callback');
+
+// ---------Login con Github-----------
+Route::get('/github-auth/redirect', [GithubController::class, 'redirect'])->name('github.login');
+Route::get('/github-auth/callback', [GithubController::class, 'callback'])->name('github.callback');
 
 // Posts
 Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
